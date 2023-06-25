@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Navbar from "../Navbar/Navbar";
 import Swal from "sweetalert2";
+import studlogo from "../../assets/svgs/student-medium-skin-tone-svgrepo-com.svg";
+import recruiterlogo from "../../assets/svgs/job-svgrepo-com.svg";
 
 function Login() {
   const navigate = useNavigate();

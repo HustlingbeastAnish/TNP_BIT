@@ -16,6 +16,7 @@ import {
 
 import { Root } from "postcss";
 import Login from "./components/Login/Login";
+import LoginLanding from "./components/LoginLanding/LoginLanding";
 function App() {
   // Declaration of Router Object
   const router = createBrowserRouter(
@@ -23,6 +24,7 @@ function App() {
       <Route path="/">
         <Route index element={<Landing />}></Route>
         <Route path="login" element={<Login />}></Route>
+        <Route path="loginlanding" element={<LoginLanding />}></Route>
         {/* <Route path="user">
           <Route index element={<UserProfile />}></Route>
           <Route path="dashboard" element={<Dashboard />}></Route>
