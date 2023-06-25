@@ -3,11 +3,13 @@ import "./App.css";
 import "tailwindcss/tailwind.css";
 import Navbar from "./components/Navbar/Navbar";
 import Gallery from "./components/Gallery/Gallery";
+import Landing from "./components/Landing/Landing";
 function App() {
   return (
     <>
       <Navbar />
-      <Gallery />
+      <Landing />
+      {/* <Gallery /> */}
       {/* <div className="flex justify-center items-center">
         <h2 className="text-red-600"> Sup GLobal</h2>
       </div> */}
