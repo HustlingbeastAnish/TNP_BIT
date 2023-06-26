@@ -1,9 +1,6 @@
 import React from "react";
 import Navbar from "../Navbar/Navbar";
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import studlogo from "../../assets/svgs/student-medium-skin-tone-svgrepo-com.svg";
-import recruiterlogo from "../../assets/svgs/job-svgrepo-com.svg";
 
 const Landing = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -15,14 +12,37 @@ const Landing = () => {
   return (
     <>
       <Navbar />
+      <button
+        type="button"
+        onClick={handleModalToggle}
+        className="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700"
+      >
+        <svg
+          aria-hidden="true"
+          className="w-4 h-4 mr-2"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+          ></path>
+        </svg>
+        Get Started
+      </button>
+
       {isModalOpen && (
         <div
           id="crypto-modal"
           tabIndex="-1"
           aria-hidden="true"
-          className="fixed top-0 left-0 right-0 z-50 flex items-center justify-center w-full h-full overflow-x-hidden overflow-y-auto bg-gray-500 bg-opacity-50"
+          className="fixed top-0 left-0 right-0 z-50 flex items-center justify-center w-full h-full overflow-x-hidden overflow-y-auto bg-gray-900 bg-opacity-50"
         >
-          <div className="bg-black rounded-lg shadow-lg dark:bg-gray-700 w-96">
+          <div className="bg-white rounded-lg shadow-lg dark:bg-gray-700">
             <button
               type="button"
               onClick={handleModalToggle}
@@ -43,57 +63,45 @@ const Landing = () => {
               </svg>
             </button>
 
-            <div className="px-6 py-4 flex flex-col justify-center items-center p-3">
-              <div className="text-xl font-semibold text-gray-900 dark:text-white">
+            <div className="px-6 py-4">
+              <div className="text-xl font-medium text-gray-900 dark:text-white">
                 Choose your Domain
               </div>
               <div className="mt-4">
-                <p className="text-base text-gray-600  font-semibold dark:text-gray-400">
+                <p className="text-base text-gray-600 dark:text-gray-400">
                   Login using the options below:
                 </p>
               </div>
             </div>
 
-            <div className="px-6 pt-4 pb-2 m-4">
-              <div className="flex flex-col justify-center items-center">
+            <div className="px-6 pt-4 pb-2">
+              <div>
                 <img
                   src={studlogo}
                   alt="Student Logo"
                   className="w-20 h-20 mx-auto mb-4"
                 />
-                <Link to="/loginstudent">
-                  <button
-                    type="button"
-                    className="px-4 py-2 font-semibold text-gray-200 bg-gray-800 rounded-lg hover:bg-gray-900 "
-                  >
-                    Login As Student
-                  </button>
-                </Link>
-                <Link to="/registerstudent">
-                  <button
-                    type="button"
-                    className="px-4 py-2 font-semibold text-gray-200 bg-gray-800 rounded-lg hover:bg-gray-900 "
-                  >
-                    Register As Student
-                  </button>
-                </Link>
+                <button
+                  type="button"
+                  className="px-4 py-2 font-semibold text-gray-200 bg-gray-800 rounded-lg hover:bg-gray-700 focus:bg-gray-700 focus:outline-none"
+                >
+                  Login As Student
+                </button>
               </div>
             </div>
-            <div className="px-6 pt-4 pb-2 m-4">
-              <div className="flex flex-col justify-center items-center">
+            <div className="px-6 pt-4 pb-2">
+              <div>
                 <img
                   src={recruiterlogo}
                   alt="Recruiter Logo"
                   className="w-20 h-20 mx-auto mb-4"
                 />
-                <Link to="/loginrecruiter">
-                  <button
-                    type="button"
-                    className="px-4 py-2 font-semibold text-gray-200 bg-gray-800 rounded-lg hover:bg-gray-900"
-                  >
-                    Login As Recruiter
-                  </button>
-                </Link>
+                <button
+                  type="button"
+                  className="px-4 py-2 font-semibold text-gray-200 bg-gray-800 rounded-lg hover:bg-gray-700 focus:bg-gray-700 focus:outline-none"
+                >
+                  Login As Recruiter
+                </button>
               </div>
             </div>
           </div>
@@ -112,25 +120,24 @@ const Landing = () => {
             for excellence and deliver impact in their field of work.
           </p>
           <div className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
-            <button
-              onClick={handleModalToggle}
-              className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900"
-            >
-              Get started
-              <svg
-                aria-hidden="true"
-                className="ml-2 -mr-1 w-4 h-4"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                  clipRule="evenodd"
-                ></path>
-              </svg>
-            </button>
+            <Link to="/login">
+              <button className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+                Get started
+                <svg
+                  aria-hidden="true"
+                  className="ml-2 -mr-1 w-4 h-4"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  ></path>
+                </svg>
+              </button>
+            </Link>
             <a
               href="#"
               className="inline-flex justify-center hover:text-gray-900 items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg border border-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-400"

@@ -16,7 +16,7 @@ import {
 
 import { Root } from "postcss";
 import LoginStudent from "./components/Logins/LoginStudent";
-import LoginRecruiter from "./components/Logins/LoginRecruiter";
+import LoginRecruiter from "./components/Logins/LoginStudent";
 function App() {
   // Declaration of Router Object
   const router = createBrowserRouter(

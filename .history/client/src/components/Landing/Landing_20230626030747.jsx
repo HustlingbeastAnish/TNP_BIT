@@ -22,7 +22,7 @@ const Landing = () => {
           aria-hidden="true"
           className="fixed top-0 left-0 right-0 z-50 flex items-center justify-center w-full h-full overflow-x-hidden overflow-y-auto bg-gray-500 bg-opacity-50"
         >
-          <div className="bg-black rounded-lg shadow-lg dark:bg-gray-700 w-96">
+          <div className="bg-white rounded-lg shadow-lg dark:bg-gray-700 w-96">
             <button
               type="button"
               onClick={handleModalToggle}
@@ -54,46 +54,34 @@ const Landing = () => {
               </div>
             </div>
 
-            <div className="px-6 pt-4 pb-2 m-4">
+            <div className="px-6 pt-4 pb-2 ">
               <div className="flex flex-col justify-center items-center">
                 <img
                   src={studlogo}
                   alt="Student Logo"
                   className="w-20 h-20 mx-auto mb-4"
                 />
-                <Link to="/loginstudent">
-                  <button
-                    type="button"
-                    className="px-4 py-2 font-semibold text-gray-200 bg-gray-800 rounded-lg hover:bg-gray-900 "
-                  >
-                    Login As Student
-                  </button>
-                </Link>
-                <Link to="/registerstudent">
-                  <button
-                    type="button"
-                    className="px-4 py-2 font-semibold text-gray-200 bg-gray-800 rounded-lg hover:bg-gray-900 "
-                  >
-                    Register As Student
-                  </button>
-                </Link>
+                <button
+                  type="button"
+                  className="px-4 py-2 font-semibold text-gray-200 bg-gray-800 rounded-lg hover:bg-gray-900 "
+                >
+                  Login As Student
+                </button>
               </div>
             </div>
-            <div className="px-6 pt-4 pb-2 m-4">
+            <div className="px-6 pt-4 pb-2">
               <div className="flex flex-col justify-center items-center">
                 <img
                   src={recruiterlogo}
                   alt="Recruiter Logo"
                   className="w-20 h-20 mx-auto mb-4"
                 />
-                <Link to="/loginrecruiter">
-                  <button
-                    type="button"
-                    className="px-4 py-2 font-semibold text-gray-200 bg-gray-800 rounded-lg hover:bg-gray-900"
-                  >
-                    Login As Recruiter
-                  </button>
-                </Link>
+                <button
+                  type="button"
+                  className="px-4 py-2 font-semibold text-gray-200 bg-gray-800 rounded-lg hover:bg-gray-900 focus:bg-gray-700 focus:outline-none"
+                >
+                  Login As Recruiter
+                </button>
               </div>
             </div>
           </div>
