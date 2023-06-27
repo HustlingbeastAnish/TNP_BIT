@@ -35,12 +35,11 @@ const StudentLoginSchema = new mongoose.Schema(
   { strict: false }
 );
 // Firing a function before the doc is saved to the database
-// .pre and .post are the Mongoose Hooks
+
 StudentLoginSchema.pre("save", async function (next) {
   const salt = await bcrypt.genSalt();
   this.password = await bcrypt.hash(this.password, salt);
   next();
 });
-
 const StudentLogin = mongoose.model("STLOGINUSER", StudentLoginSchema);
 module.exports = StudentLogin;
