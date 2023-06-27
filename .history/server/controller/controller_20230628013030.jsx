@@ -13,15 +13,15 @@ const handleErrors = (err) => {
   };
 
   // Handling duplicate erros
-  if (err.code === 11000) {
-    // Check the duplicate field and assign the error message accordingly
-    if (err.keyPattern.hasOwnProperty("email")) {
-      errors.email = "Email already exists";
-    } else if (err.keyPattern.hasOwnProperty("roll")) {
-      errors.roll = "Roll number already exists";
-    }
-    return errors;
-  }
+  // if (err.code === 11000) {
+  //   // Check the duplicate field and assign the error message accordingly
+  //   if (err.keyPattern.hasOwnProperty("email")) {
+  //     errors.email = "Email already exists";
+  //   } else if (err.keyPattern.hasOwnProperty("roll")) {
+  //     errors.roll = "Roll number already exists";
+  //   }
+  //   return errors;
+  // }
 
   // Validation errors
   if (err.message.includes("STLOGINUSER validation failed")) {

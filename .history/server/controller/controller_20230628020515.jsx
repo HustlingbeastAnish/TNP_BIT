@@ -12,7 +12,7 @@ const handleErrors = (err) => {
     branch: "",
   };
 
-  // Handling duplicate erros
+  Handling duplicate erros
   if (err.code === 11000) {
     // Check the duplicate field and assign the error message accordingly
     if (err.keyPattern.hasOwnProperty("email")) {

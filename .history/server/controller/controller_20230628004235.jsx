@@ -3,53 +3,33 @@ const StudentLogin = require("../models/StudLogin.jsx");
 // Error Handlers
 const handleErrors = (err) => {
   console.log(err.message, err.code);
-  let errors = {
-    name: "",
-    email: "",
-    phone: 0,
-    password: "",
-    roll: "",
-    branch: "",
-  };
+  let errors = { name, email, phone, password, roll, branch };
 
   // Handling duplicate erros
   if (err.code === 11000) {
-    // Check the duplicate field and assign the error message accordingly
-    if (err.keyPattern.hasOwnProperty("email")) {
-      errors.email = "Email already exists";
-    } else if (err.keyPattern.hasOwnProperty("roll")) {
-      errors.roll = "Roll number already exists";
-    }
+    errors.email = "Email already Exists";
     return errors;
   }
 
   // Validation errors
-  if (err.message.includes("STLOGINUSER validation failed")) {
+  if (err.message.includes("user validation failed")) {
     Object.values(err.errors).forEach(({ properties }) => {
       errors[properties.path] = properties.message;
     });
   }
-  return errors;
 };
 exports.registerStudent = async (req, res) => {
   const { name, email, phone, password, roll, branch } = req.body;
+
   if (!name || !email || !phone || !password || !roll || !branch) {
-    console.log(req.body);
     return res.status(400).json({ error: "Please fill in all the details" });
   }
-
   try {
     const userExists = await StudentLogin.findOne({ email });
     if (userExists) {
-      if (userExists.email === email) {
-        return res
-          .status(400)
-          .json({ error: "User with this email already exists" });
-      } else {
-        return res
-          .status(400)
-          .json({ error: "User with this roll number already exists" });
-      }
+      return res
+        .status(400)
+        .json({ error: "User with this email already exists" });
     }
 
     const user = new StudentLogin({
@@ -62,6 +42,7 @@ exports.registerStudent = async (req, res) => {
     });
 
     const signUp = await user.save();
+
     if (signUp) {
       return res.status(201).json({ message: "Registration successful" });
     } else {

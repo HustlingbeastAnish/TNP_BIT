@@ -13,15 +13,15 @@ const handleErrors = (err) => {
   };
 
   // Handling duplicate erros
-  if (err.code === 11000) {
-    // Check the duplicate field and assign the error message accordingly
-    if (err.keyPattern.hasOwnProperty("email")) {
-      errors.email = "Email already exists";
-    } else if (err.keyPattern.hasOwnProperty("roll")) {
-      errors.roll = "Roll number already exists";
-    }
-    return errors;
-  }
+  // if (err.code === 11000) {
+  //   // Check the duplicate field and assign the error message accordingly
+  //   if (err.keyPattern.hasOwnProperty("email")) {
+  //     errors.email = "Email already exists";
+  //   } else if (err.keyPattern.hasOwnProperty("roll")) {
+  //     errors.roll = "Roll number already exists";
+  //   }
+  //   return errors;
+  // }
 
   // Validation errors
   if (err.message.includes("STLOGINUSER validation failed")) {
@@ -32,14 +32,16 @@ const handleErrors = (err) => {
   return errors;
 };
 exports.registerStudent = async (req, res) => {
-  const { name, email, phone, password, roll, branch } = req.body;
-  if (!name || !email || !phone || !password || !roll || !branch) {
-    console.log(req.body);
+  const { Name, email, phone, password, roll, branch } = req.body;
+
+  if (!Name || !email || !phone || !password || !roll || !branch) {
     return res.status(400).json({ error: "Please fill in all the details" });
   }
 
   try {
-    const userExists = await StudentLogin.findOne({ email });
+    const userExists = await StudentLogin.exists({
+      $or: [{ email }, { roll }],
+    });
     if (userExists) {
       if (userExists.email === email) {
         return res
@@ -53,7 +55,7 @@ exports.registerStudent = async (req, res) => {
     }
 
     const user = new StudentLogin({
-      name,
+      Name,
       email,
       phone,
       password,

@@ -13,15 +13,15 @@ const handleErrors = (err) => {
   };
 
   // Handling duplicate erros
-  if (err.code === 11000) {
-    // Check the duplicate field and assign the error message accordingly
-    if (err.keyPattern.hasOwnProperty("email")) {
-      errors.email = "Email already exists";
-    } else if (err.keyPattern.hasOwnProperty("roll")) {
-      errors.roll = "Roll number already exists";
-    }
-    return errors;
-  }
+  // if (err.code === 11000) {
+  //   // Check the duplicate field and assign the error message accordingly
+  //   if (err.keyPattern.hasOwnProperty("email")) {
+  //     errors.email = "Email already exists";
+  //   } else if (err.keyPattern.hasOwnProperty("roll")) {
+  //     errors.roll = "Roll number already exists";
+  //   }
+  //   return errors;
+  // }
 
   // Validation errors
   if (err.message.includes("STLOGINUSER validation failed")) {
@@ -33,27 +33,21 @@ const handleErrors = (err) => {
 };
 exports.registerStudent = async (req, res) => {
   const { name, email, phone, password, roll, branch } = req.body;
+
   if (!name || !email || !phone || !password || !roll || !branch) {
-    console.log(req.body);
     return res.status(400).json({ error: "Please fill in all the details" });
   }
 
   try {
     const userExists = await StudentLogin.findOne({ email });
     if (userExists) {
-      if (userExists.email === email) {
-        return res
-          .status(400)
-          .json({ error: "User with this email already exists" });
-      } else {
-        return res
-          .status(400)
-          .json({ error: "User with this roll number already exists" });
-      }
+      return res
+        .status(400)
+        .json({ error: "User with this email already exists" });
     }
 
     const user = new StudentLogin({
-      name,
+      Name,
       email,
       phone,
       password,
@@ -68,6 +62,10 @@ exports.registerStudent = async (req, res) => {
       return res.status(400).json({ error: "Registration failed" });
     }
   } catch (err) {
+    if (err.code === 11000 && err.keyPattern && err.keyPattern.Name) {
+      // Duplicate key error for the 'name' field
+      return res.status(400).json({ error: "Name already exists" });
+    }
     console.error(err);
     return res.status(500).json({ error: "Internal server error" });
   }
