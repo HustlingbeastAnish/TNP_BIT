@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import Swal from "sweetalert2";
-
+import MenuItem from "@mui/material/MenuItem";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 const Signup = () => {
   const navigate = useNavigate();
 
@@ -24,15 +27,17 @@ const Signup = () => {
     e.preventDefault();
 
     // Validate the form fields here
-
     try {
-      const response = await fetch("/api/users", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-      });
+      const response = await fetch(
+        "http://localhost:8080/api/registerStudent",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(user),
+        }
+      );
 
       const data = await response.json();
 
@@ -66,7 +71,7 @@ const Signup = () => {
           <div className="flex justify-center"></div>
           <h3 className="text-2xl font-bold text-center text-white">Join us</h3>
           <form onSubmit={handleFormSubmit}>
-            <div className="mt-4">
+            <div className="mt2">
               <div>
                 <label className="block text-white" htmlFor="name">
                   Name
@@ -80,7 +85,7 @@ const Signup = () => {
                   className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
                 />
               </div>
-              <div className="mt-4">
+              <div className="mt-2">
                 <label className="block text-white" htmlFor="email">
                   Email
                 </label>
@@ -94,7 +99,7 @@ const Signup = () => {
                 />
               </div>
               <div className="flex flex-row">
-                <div className="mr-4 mt-4">
+                <div className="mr-4 mt-2">
                   <label className="block text-white">Password</label>
                   <input
                     type="password"
@@ -105,7 +110,7 @@ const Signup = () => {
                     className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
                   />
                 </div>
-                <div className="ml-4 mt-4">
+                <div className="ml-4 mt-2">
                   <label className="block text-white">Confirm Password</label>
                   <input
                     type="password"
@@ -116,7 +121,7 @@ const Signup = () => {
                 </div>
               </div>
               <div className="flex flex-row">
-                <div className="mr-4 mt-4">
+                <div className="mr-4 mt-2">
                   <label className="block text-white">Phone</label>
                   <input
                     type="text"
@@ -127,7 +132,7 @@ const Signup = () => {
                     className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
                   />
                 </div>
-                <div className="ml-4 mt-4">
+                <div className="ml-4 mt-2">
                   <label className="block text-white">Roll Number</label>
                   <input
                     type="text"
@@ -139,20 +144,45 @@ const Signup = () => {
                   />
                 </div>
               </div>
-              <div className="mt-4">
-                <label className="block text-white">Branch</label>
-                <input
-                  type="text"
-                  name="branch"
-                  value={user.branch}
-                  onChange={handleInputChange}
-                  placeholder="Branch"
-                  className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
-                />
+              <div className="w-full mt-2 mb-2">
+                <label
+                  htmlFor="exampleInputEmail2"
+                  className="form-label inline-block mb-2 text-white"
+                >
+                  Select Branch
+                </label>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label font-semibold">
+                    Branch
+                  </InputLabel>
+                  <Select
+                    style={{
+                      borderRadius: "8px",
+                      height: "45px",
+                      fontSize: "15px",
+                      backgroundColor: "white",
+                      borderColor: "black",
+                    }}
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={user.branch}
+                    name="branch"
+                    label="Branches"
+                    onChange={handleInputChange}
+                  >
+                    <MenuItem value={"CSE"}>CSE</MenuItem>
+                    <MenuItem value={"IT"}>IT</MenuItem>
+                    <MenuItem value={"ECE"}>ECE</MenuItem>
+                    <MenuItem value={"EEE"}>EEE</MenuItem>
+                    <MenuItem value={"MECH"}>MECH</MenuItem>
+                    <MenuItem value={"CIVIL"}>CIVIL</MenuItem>
+                  </Select>
+                </FormControl>
               </div>
               <div className="flex">
                 <button
                   type="submit"
+                  onClick={handleFormSubmit}
                   className="w-full px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900"
                 >
                   Create Account
