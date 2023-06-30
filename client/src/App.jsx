@@ -4,6 +4,8 @@ import "tailwindcss/tailwind.css";
 import Navbar from "./components/Navbar/Navbar";
 import Gallery from "./components/Gallery/Gallery";
 import Landing from "./components/Landing/Landing";
+import StudentDashboard from "./components/StudentDashBoard/studentDashboard";
+import RegisterStudent from "./components/Registers/RegisterStudent";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -24,7 +26,9 @@ function App() {
       <Route path="/">
         <Route index element={<Landing />}></Route>
         <Route path="loginstudent" element={<LoginStudent />}></Route>
+        <Route path="registerstudent" element={<RegisterStudent />}></Route>
         <Route path="loginrecruiter" element={<LoginRecruiter />}></Route>
+        <Route path="studentDashboard" element={<StudentDashboard />}></Route>
         {/* <Route path="login">
           <Route index element={<Login />}></Route>
           <Route path="student" element={<LoginStudent />}></Route> */}

@@ -11,7 +11,7 @@ function Login() {
   const PostLogIn = async (e) => {
     e.preventDefault();
 
-    const res = await fetch("/api/userf", {
+    const res = await fetch("http://localhost:8080/api/loginStudent", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -21,7 +21,6 @@ function Login() {
         password,
       }),
     });
-
     const data = await res.json();
     console.log(data);
     if (data.status === 400 || !data || data.error) {
@@ -39,7 +38,7 @@ function Login() {
       });
       console.log("Successfully Logged In");
       setTimeout(() => {
-        navigate("/tlogin");
+        navigate("/StudentDashBoard");
       }, 1500);
     }
   };
