@@ -56,7 +56,7 @@ const Signup = () => {
           icon: "success",
           timer: 1000,
         });
-        navigate("/loginteach");
+        navigate("/loginstudent");
       }
     } catch (error) {
       // Handle fetch error

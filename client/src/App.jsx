@@ -16,9 +16,12 @@ import {
   ScrollRestoration,
 } from "react-router-dom";
 
+import Notifications from "./components/StudentDashBoard/Notifications/Notifications";
 import { Root } from "postcss";
 import LoginStudent from "./components/Logins/LoginStudent";
 import LoginRecruiter from "./components/Logins/LoginRecruiter";
+import Profile from "./components/StudentDashBoard/Profile/Profile";
+import PrivateRoute from "./PrivateRoutes";
 function App() {
   // Declaration of Router Object
   const router = createBrowserRouter(
@@ -28,14 +31,20 @@ function App() {
         <Route path="loginstudent" element={<LoginStudent />}></Route>
         <Route path="registerstudent" element={<RegisterStudent />}></Route>
         <Route path="loginrecruiter" element={<LoginRecruiter />}></Route>
-        <Route path="studentDashboard" element={<StudentDashboard />}></Route>
-        {/* <Route path="login">
-          <Route index element={<Login />}></Route>
-          <Route path="student" element={<LoginStudent />}></Route> */}
-        {/* <Route path="expressions" element={<UserExpressions />}></Route>
+        <Route path="studentDashboard">
+          <Route index element={<StudentDashboard />}></Route>
+          <Route
+            path="profile"
+            element={
+              <PrivateRoute>
+                <Profile />
+              </PrivateRoute>
+            }
+          ></Route>
+          {/* <Route path="expressions" element={<Setting  />}></Route>
           <Route path="fundcampaigns" element={<UserCampaigns />}></Route>
           <Route path="donations" element={<UserDonations />}></Route> */}
-        {/* </Route> */}
+        </Route>
       </Route>
     )
   );

@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import studlogo from "../../assets/svgs/student-medium-skin-tone-svgrepo-com.svg";
+import { StudentContext } from "../../../../LoginContext/StudentContext";
 function Login() {
   const navigate = useNavigate();
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
-
+  const context = useContext(StudentContext);
   const PostLogIn = async (e) => {
     e.preventDefault();
 
@@ -23,6 +24,9 @@ function Login() {
     });
     const data = await res.json();
     console.log(data);
+    context.setuser(data);
+    console.log(context.user);
+    localStorage.setItem("studentUser", JSON.stringify(data));
     if (data.status === 400 || !data || data.error) {
       Swal.fire({
         title: "Bad Credentials",
