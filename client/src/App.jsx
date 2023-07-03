@@ -32,7 +32,14 @@ function App() {
         <Route path="registerstudent" element={<RegisterStudent />}></Route>
         <Route path="loginrecruiter" element={<LoginRecruiter />}></Route>
         <Route path="studentDashboard">
-          <Route index element={<StudentDashboard />}></Route>
+          <Route
+            index
+            element={
+              <PrivateRoute>
+                <StudentDashboard />
+              </PrivateRoute>
+            }
+          ></Route>
           <Route
             path="profile"
             element={
