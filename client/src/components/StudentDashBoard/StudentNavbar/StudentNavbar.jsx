@@ -1,10 +1,16 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 function StudentNavbar() {
+  const navigate = useNavigate();
   const [activeMenuItem, setActiveMenuItem] = useState("dashboard");
 
   const handleMenuItemClick = (menuItem) => {
     setActiveMenuItem(menuItem);
+  };
+  const Logout = () => {
+    // Remove user from storage
+    localStorage.removeItem("studentUser");
+    navigate("/");
   };
   return (
     <div>
@@ -97,30 +103,45 @@ function StudentNavbar() {
             </a>
           </li>
           <li className="mr-2">
+            <Link to="/">
+              <a
+                href="#"
+                className={`inline-flex p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group ${
+                  activeMenuItem === "contacts"
+                    ? "text-blue-600 border-blue-600 underline"
+                    : ""
+                }`}
+                onClick={() => handleMenuItemClick("contacts")}
+              >
+                <svg
+                  aria-hidden="true"
+                  className={`w-5 h-5 mr-2 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300 ${
+                    activeMenuItem === "contacts"
+                      ? "text-blue-600 dark:text-blue-500"
+                      : ""
+                  }`}
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M8 1a1 1 0 011 1v.5a1 1 0 102 0V2a1 1 0 011-1h2a4 4 0 014 4v3a4 4 0 01-1.293 3.043A3.962 3.962 0 0116 14v1a1 1 0 01-1 1H5a1 1 0 01-1-1v-1a3.962 3.962 0 012.293-3.557A4 4 0 015 10V7a4 4 0 014-4V2a1 1 0 011-1h2zM8 8a2 2 0 104 0H8z"></path>
+                  <path d="M10 14a2 2 0 100 4 2 2 0 000-4zm0 2a1 1 0 110-2 1 1 0 010 2z"></path>
+                </svg>
+                Home
+              </a>
+            </Link>
+          </li>
+          <li className="ml-auto">
             <a
               href="#"
               className={`inline-flex p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group ${
-                activeMenuItem === "contacts"
+                activeMenuItem === "logout"
                   ? "text-blue-600 border-blue-600 underline"
                   : ""
               }`}
-              onClick={() => handleMenuItemClick("contacts")}
+              onClick={Logout}
             >
-              <svg
-                aria-hidden="true"
-                className={`w-5 h-5 mr-2 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300 ${
-                  activeMenuItem === "contacts"
-                    ? "text-blue-600 dark:text-blue-500"
-                    : ""
-                }`}
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M8 1a1 1 0 011 1v.5a1 1 0 102 0V2a1 1 0 011-1h2a4 4 0 014 4v3a4 4 0 01-1.293 3.043A3.962 3.962 0 0116 14v1a1 1 0 01-1 1H5a1 1 0 01-1-1v-1a3.962 3.962 0 012.293-3.557A4 4 0 015 10V7a4 4 0 014-4V2a1 1 0 011-1h2zM8 8a2 2 0 104 0H8z"></path>
-                <path d="M10 14a2 2 0 100 4 2 2 0 000-4zm0 2a1 1 0 110-2 1 1 0 010 2z"></path>
-              </svg>
-              Contacts
+              Logout
             </a>
           </li>
         </ul>

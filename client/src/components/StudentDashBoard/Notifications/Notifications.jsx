@@ -6,7 +6,6 @@ const Notifications = () => {
   const handleFilterChange = (e) => {
     setSelectedFilter(e.target.value);
   };
-
   return (
     <div className="bg-gray-900 h-screen">
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -144,10 +143,10 @@ const Notifications = () => {
         <table className="min-w-full divide-y divide-gray-200">
           <thead>
             <tr>
-              <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                 Mark as Read
               </th>
-              <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                 Notification
               </th>
             </tr>
@@ -156,17 +155,18 @@ const Notifications = () => {
             <tr>
               <td className="px-6 py-4 whitespace-nowrap">
                 <input
-                  id="checkbox1"
+                  id="checkbox2"
                   type="checkbox"
                   className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                 />
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
                 <div className="text-sm font-medium text-gray-900 dark:text-gray-200">
-                  New message received
+                  CISCO - CISCO - CISCO Pre-Placement Talk
                 </div>
                 <div className="text-sm text-gray-500 dark:text-gray-400">
-                  You have a new message from John Doe.
+                  CISCO is here with its PPT(Pre-Placement Talk) which will be
+                  conducted on the 5th of July, from 04:45 PM to 6:15 PM.
                 </div>
               </td>
             </tr>
@@ -180,10 +180,69 @@ const Notifications = () => {
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
                 <div className="text-sm font-medium text-gray-900 dark:text-gray-200">
-                  New friend request
+                  NOTICE - DELOITTE INDIA
                 </div>
                 <div className="text-sm text-gray-500 dark:text-gray-400">
-                  You have a new friend request from Jane Doe.
+                  We have got new notification from Deloitte India regarding its
+                  registeration for the ET&P role and the company has asked to
+                  hault the registration process for sometime.
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td className="px-6 py-4 whitespace-nowrap">
+                <input
+                  id="checkbox2"
+                  type="checkbox"
+                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                />
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                <div className="text-sm font-medium text-gray-900 dark:text-gray-200">
+                  Salesforce Online Assessment (B.Tech-k21)
+                </div>
+                <div className="text-sm text-gray-500 dark:text-gray-400">
+                  Salesforce will be conducting an online assessment for Intern
+                  Software Engineer. There will be an info session after which
+                  the details for the online assessment will be shared in real
+                  time.
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td className="px-6 py-4 whitespace-nowrap">
+                <input
+                  id="checkbox2"
+                  type="checkbox"
+                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                />
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                <div className="text-sm font-medium text-gray-900 dark:text-gray-200">
+                  CISCO - Code with Cisco | An Inclusive Code-a-thon
+                </div>
+                <div className="text-sm text-gray-500 dark:text-gray-400">
+                  CISCO is here with its 24-hour CODE-A-THON which is open for
+                  both the 2024-2025 passing out batches.
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td className="px-6 py-4 whitespace-nowrap">
+                <input
+                  id="checkbox2"
+                  type="checkbox"
+                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                />
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                <div className="text-sm font-medium text-gray-900 dark:text-gray-200">
+                  Tata Crucible Campus Quiz
+                </div>
+                <div className="text-sm text-gray-500 dark:text-gray-400">
+                  It is to remind that the Tata Crucible Campus Quiz 2023
+                  Prelims 1is scheduled to take place today from 6:30 pm
+                  onwards.
                 </div>
               </td>
             </tr>
