@@ -23,6 +23,8 @@ const Profile = () => {
     sem7: "0.00",
     sem8: "0.00",
   });
+  const [flag, setflag] = useState(false);
+  const [avg, setavg] = useState(0.0);
   const handleEdit = (e) => {
     const { name, value } = e.target;
     setupdatedStud({ ...updatedStud, [name]: value });
@@ -33,6 +35,23 @@ const Profile = () => {
     if (regex.test(value) || value === "" || value.length > 4) {
       setmarks({ ...marks, [name]: value.substr(0, 4) });
     }
+  };
+
+  const calAvg = () => {
+    let x = 0;
+    let sum = 0.0;
+    for (let i = 1; i <= 8; i++) {
+      if (marks[`sem${i}`] !== "0.00") {
+        x++;
+        sum += parseFloat(marks[`sem${i}`]);
+      }
+    }
+    if (x === 0) {
+      setavg(0.0);
+    } else {
+      setavg(sum / x).toFixed(2);
+    }
+    setflag(true);
   };
   useEffect(() => {
     if (context.user) {
@@ -173,13 +192,13 @@ const Profile = () => {
               </div>
             </div>
           </div>
-          <BottomDrawer />
+          {/* <BottomDrawer /> */}
         </form>
         <form className="m-10">
           <h2 class="text-4xl font-extrabold dark:text-white">
             Academic Details
           </h2>
-          <div className="relative z-0 w-full mb-6 group">
+          <div className="relative z-0 w-full mb-6 group flex flex-col">
             <div className="grid grid-flow-col justify-stretch">
               <div className="m-2">
                 <label
@@ -333,8 +352,25 @@ const Profile = () => {
                 />
               </div>
             </div>
+            <div className="flex justify-center items-center m-2">
+              <button
+                type="button"
+                onClick={calAvg}
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              >
+                Get CGPA
+              </button>
+              {flag && (
+                <button
+                  type="button"
+                  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                >
+                  {avg}
+                </button>
+              )}
+            </div>
           </div>
-          <BottomDrawer />
+          {/* <BottomDrawer /> */}
         </form>
       </div>
     </div>
