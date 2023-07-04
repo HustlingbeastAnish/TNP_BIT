@@ -2,7 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import StudentNavbar from "../StudentNavbar/StudentNavbar";
 import BottomDrawer from "../BottomDrawer/BottomDrawer";
 import { StudentContext } from "../../../../../LoginContext/StudentContext";
-
+import MenuItem from "@mui/material/MenuItem";
+import InputLabel from "@mui/material/InputLabel";
+import Select from "@mui/material/Select";
+import { Bar, Line, Pie } from "react-chartjs-2";
+import { Chart as ChartJS } from "chart.js/auto";
+import FormControl from "@mui/material/FormControl";
 const Profile = () => {
   const context = useContext(StudentContext);
   const [updatedStud, setupdatedStud] = useState({
@@ -23,6 +28,17 @@ const Profile = () => {
     sem7: "0.00",
     sem8: "0.00",
   });
+  const marksData = {
+    labels: Object.keys(marks), // Generate labels dynamically from the properties of the marks object
+    datasets: [
+      {
+        label: "Attendance Percentage",
+        data: Object.values(marks),
+        backgroundColor: "black",
+        borderColor: "white",
+      },
+    ],
+  };
   const [flag, setflag] = useState(false);
   const [avg, setavg] = useState(0.0);
   const handleEdit = (e) => {
@@ -67,7 +83,7 @@ const Profile = () => {
     }
   }, [context.user]);
   return context.user ? (
-    <div className="bg-gray-900 h-screen">
+    <div className="bg-gray-900 h-auto">
       <div>
         <StudentNavbar />
       </div>
@@ -177,18 +193,31 @@ const Profile = () => {
                   htmlFor="email"
                   className="block mb-2 text-sm font-medium text-white dark:text-white"
                 >
-                  Email
+                  Branch
                 </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={updatedStud.email}
-                  onChange={handleEdit}
-                  className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-                  placeholder="Enter your email"
-                  required
-                />
+                <FormControl fullWidth>
+                  <Select
+                    style={{
+                      borderRadius: "8px",
+                      height: "42px",
+                      color: "white",
+                    }}
+                    className="shadow-sm bg-gray-50 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={updatedStud.branch}
+                    name="branch"
+                    label="Branches"
+                    onChange={handleEdit}
+                  >
+                    <MenuItem value={"CSE"}>CSE</MenuItem>
+                    <MenuItem value={"IT"}>IT</MenuItem>
+                    <MenuItem value={"ECE"}>ECE</MenuItem>
+                    <MenuItem value={"EEE"}>EEE</MenuItem>
+                    <MenuItem value={"MECH"}>MECH</MenuItem>
+                    <MenuItem value={"CIVIL"}>CIVIL</MenuItem>
+                  </Select>
+                </FormControl>
               </div>
             </div>
           </div>
@@ -369,8 +398,31 @@ const Profile = () => {
                 </button>
               )}
             </div>
+            {flag && (
+              <div className="">
+                <Line
+                  data={marksData}
+                  options={{
+                    plugins: {
+                      legend: {
+                        labels: {
+                          font: {
+                            size: 12,
+                          },
+                        },
+                      },
+                    },
+                    elements: {
+                      line: {
+                        borderColor: "white", // Set the line color to white
+                        borderWidth: 2, // Set the line width (optional)
+                      },
+                    },
+                  }}
+                />
+              </div>
+            )}
           </div>
-          {/* <BottomDrawer /> */}
         </form>
       </div>
     </div>
