@@ -4,7 +4,7 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 import studlogo from "../../assets/svgs/student-medium-skin-tone-svgrepo-com.svg";
 import { StudentContext } from "../../../../LoginContext/StudentContext";
-function Login() {
+const Login = () => {
   const navigate = useNavigate();
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
@@ -23,10 +23,10 @@ function Login() {
       }),
     });
     const data = await res.json();
-    console.log(data);
-    context.setuser(data);
-    console.log(context.user);
+    // console.log(data);
     localStorage.setItem("studentUser", JSON.stringify(data));
+    context.setuser(data);
+    // console.log(context.user);
     if (data.status === 400 || !data || data.error) {
       Swal.fire({
         title: "Bad Credentials",
@@ -46,7 +46,6 @@ function Login() {
       }, 1500);
     }
   };
-
   return (
     <div>
       <section className="bg-gray-900 min-h-screen flex items-center justify-center">
@@ -167,6 +166,6 @@ function Login() {
       </section>
     </div>
   );
-}
+};
 
 export default Login;

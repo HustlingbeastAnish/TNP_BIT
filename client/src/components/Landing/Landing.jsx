@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import Navbar from "../Navbar/Navbar";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import studlogo from "../../assets/svgs/student-medium-skin-tone-svgrepo-com.svg";
 import recruiterlogo from "../../assets/svgs/job-svgrepo-com.svg";
+import { StudentContext } from "../../../../LoginContext/StudentContext";
 
 const Landing = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -11,7 +12,8 @@ const Landing = () => {
   const handleModalToggle = () => {
     setIsModalOpen(!isModalOpen);
   };
-
+  const context = useContext(StudentContext);
+  console.log(context.user);
   return (
     <>
       <Navbar />
