@@ -1,255 +1,117 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Loader from "../../Loader/Loader";
 const Notifications = () => {
-  const [selectedFilter, setSelectedFilter] = useState("Last 30 days");
+  const [flag, setflag] = useState(false);
+  const [Arr, setArr] = useState([{}]);
+  const fetchJobs = () => {
+    axios
+      .get(
+        `https://api.adzuna.com/v1/api/jobs/in/search/1?&results_per_page=20&content-type=application/json&app_id=24852f12&app_key=c93fe974f8009e5341efb9e2ce97e08f&what=&where=`
+      )
+      .then((res) => {
+        if (res.data.results) {
+          setArr(res.data.results);
+          setflag(true);
+        } else {
+          window.alert("Please Enter valid credentials");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  useEffect(() => {
+    fetchJobs();
+  }, []);
+  const truncateString = (str, limit) => {
+    if (!str || str.length <= limit) {
+      return str;
+    }
 
-  const handleFilterChange = (e) => {
-    setSelectedFilter(e.target.value);
+    return str.slice(0, limit).trim() + "...";
   };
   return (
-    <div className="bg-gray-900 h-screen">
-      <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <div className="flex items-center justify-between pb-4">
-          <div>
-            <button
-              id="dropdownRadioButton"
-              data-dropdown-toggle="dropdownRadio"
-              className="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
-              type="button"
-            >
-              <svg
-                className="w-4 h-4 mr-2 text-gray-400"
-                aria-hidden="true"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
-                  clipRule="evenodd"
-                ></path>
-              </svg>
-              {selectedFilter}
-              <svg
-                className="w-3 h-3 ml-2"
-                aria-hidden="true"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M19 9l-7 7-7-7"
-                ></path>
-              </svg>
-            </button>
-            {/* <!-- Dropdown menu --> */}
-            <div
-              id="dropdownRadio"
-              className="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
-              data-popper-reference-hidden=""
-              data-popper-escaped=""
-              data-popper-placement="top"
-              style={{
-                position: "absolute",
-                inset: "auto auto 0px 0px",
-                margin: "0px",
-                transform: "translate3d(522.5px, 3847.5px, 0px)",
-              }}
-            >
-              <ul
-                className="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200"
-                aria-labelledby="dropdownRadioButton"
-              >
-                <li>
-                  <div className="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                    <input
-                      id="filter-radio-example-1"
-                      type="radio"
-                      value="Last day"
-                      name="filter-radio"
-                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-700"
-                      checked={selectedFilter === "Last day"}
-                      onChange={handleFilterChange}
-                    />
-                    <label
-                      htmlFor="filter-radio-example-1"
-                      className="ml-3 text-gray-900 dark:text-gray-200"
-                    >
-                      Last day
-                    </label>
-                  </div>
-                </li>
-                <li>
-                  <div className="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                    <input
-                      id="filter-radio-example-2"
-                      type="radio"
-                      value="Last 7 days"
-                      name="filter-radio"
-                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-700"
-                      checked={selectedFilter === "Last 7 days"}
-                      onChange={handleFilterChange}
-                    />
-                    <label
-                      htmlFor="filter-radio-example-2"
-                      className="ml-3 text-gray-900 dark:text-gray-200"
-                    >
-                      Last 7 days
-                    </label>
-                  </div>
-                </li>
-                <li>
-                  <div className="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                    <input
-                      id="filter-radio-example-3"
-                      type="radio"
-                      value="Last 30 days"
-                      name="filter-radio"
-                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-700"
-                      checked={selectedFilter === "Last 30 days"}
-                      onChange={handleFilterChange}
-                    />
-                    <label
-                      htmlFor="filter-radio-example-3"
-                      className="ml-3 text-gray-900 dark:text-gray-200"
-                    >
-                      Last 30 days
-                    </label>
-                  </div>
-                </li>
-              </ul>
+    <>
+      {flag ? (
+        <div className="bg-gray-900 h-auto">
+          <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <div className="flex items-center justify-center pb-4">
+              <div className="flex">
+                <input
+                  id="searchInput"
+                  type="text"
+                  placeholder="Search"
+                  className="block w-64 px-4 py-2 text-gray-900 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:border-gray-600 dark:text-white dark:focus:ring-gray-700"
+                />
+                <button
+                  type="button"
+                  className="flex items-center justify-center px-4 py-2 ml-4 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                >
+                  Search
+                </button>
+              </div>
             </div>
-          </div>
-          <div className="flex">
-            <input
-              id="searchInput"
-              type="text"
-              placeholder="Search"
-              className="block w-64 px-4 py-2 text-gray-900 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:border-gray-600 dark:text-white dark:focus:ring-gray-700"
-            />
-            <button
-              type="button"
-              className="flex items-center justify-center px-4 py-2 ml-4 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-            >
-              Search
-            </button>
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead>
+                <tr>
+                  <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+                    Mark as Read
+                  </th>
+                  <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+                    Notification
+                  </th>
+                  <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+                    Apply
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {Arr.map((item, index) => (
+                  <tr key={index}>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <input
+                        id={`checkbox${index}`}
+                        type="checkbox"
+                        className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                      />
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm font-medium text-gray-900 dark:text-gray-200">
+                        {item.title}
+                      </div>
+                      <div className="text-sm text-gray-500 dark:text-gray-400">
+                        {truncateString(item.description, 150)}
+                      </div>{" "}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <a
+                        href={item.redirect_url}
+                        target="_blank"
+                        className="inline-flex items-center text-white hover:underline"
+                      >
+                        Apply Now
+                        <svg
+                          className="w-5 h-5 ml-2 text-white"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+                          <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+                        </svg>
+                      </a>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead>
-            <tr>
-              <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
-                Mark as Read
-              </th>
-              <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
-                Notification
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <input
-                  id="checkbox2"
-                  type="checkbox"
-                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                />
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <div className="text-sm font-medium text-gray-900 dark:text-gray-200">
-                  CISCO - CISCO - CISCO Pre-Placement Talk
-                </div>
-                <div className="text-sm text-gray-500 dark:text-gray-400">
-                  CISCO is here with its PPT(Pre-Placement Talk) which will be
-                  conducted on the 5th of July, from 04:45 PM to 6:15 PM.
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <input
-                  id="checkbox2"
-                  type="checkbox"
-                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                />
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <div className="text-sm font-medium text-gray-900 dark:text-gray-200">
-                  NOTICE - DELOITTE INDIA
-                </div>
-                <div className="text-sm text-gray-500 dark:text-gray-400">
-                  We have got new notification from Deloitte India regarding its
-                  registeration for the ET&P role and the company has asked to
-                  hault the registration process for sometime.
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <input
-                  id="checkbox2"
-                  type="checkbox"
-                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                />
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <div className="text-sm font-medium text-gray-900 dark:text-gray-200">
-                  Salesforce Online Assessment (B.Tech-k21)
-                </div>
-                <div className="text-sm text-gray-500 dark:text-gray-400">
-                  Salesforce will be conducting an online assessment for Intern
-                  Software Engineer. There will be an info session after which
-                  the details for the online assessment will be shared in real
-                  time.
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <input
-                  id="checkbox2"
-                  type="checkbox"
-                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                />
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <div className="text-sm font-medium text-gray-900 dark:text-gray-200">
-                  CISCO - Code with Cisco | An Inclusive Code-a-thon
-                </div>
-                <div className="text-sm text-gray-500 dark:text-gray-400">
-                  CISCO is here with its 24-hour CODE-A-THON which is open for
-                  both the 2024-2025 passing out batches.
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <input
-                  id="checkbox2"
-                  type="checkbox"
-                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                />
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <div className="text-sm font-medium text-gray-900 dark:text-gray-200">
-                  Tata Crucible Campus Quiz
-                </div>
-                <div className="text-sm text-gray-500 dark:text-gray-400">
-                  It is to remind that the Tata Crucible Campus Quiz 2023
-                  Prelims 1is scheduled to take place today from 6:30 pm
-                  onwards.
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+      ) : (
+        <Loader />
+      )}
+    </>
   );
 };
 

@@ -84,7 +84,7 @@ const Landing = () => {
                 </div>
               </div>
             </div>
-            <div className="px-6 pt-4 pb-2 m-4">
+            {/* <div className="px-6 pt-4 pb-2 m-4">
               <div className="flex flex-col justify-center items-center">
                 <img
                   src={recruiterlogo}
@@ -100,7 +100,7 @@ const Landing = () => {
                   </button>
                 </Link>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       )}

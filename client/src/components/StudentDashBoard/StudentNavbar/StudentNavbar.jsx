@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 function StudentNavbar() {
   const navigate = useNavigate();
   const [activeMenuItem, setActiveMenuItem] = useState("dashboard");
@@ -134,14 +136,14 @@ function StudentNavbar() {
           <li className="ml-auto">
             <a
               href="#"
-              className={`inline-flex p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group ${
+              className={`inline-flex items-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group ${
                 activeMenuItem === "logout"
                   ? "text-blue-600 border-blue-600 underline"
                   : ""
               }`}
               onClick={Logout}
             >
-              Logout
+              <FontAwesomeIcon icon={faSignOutAlt} /> Logout
             </a>
           </li>
         </ul>

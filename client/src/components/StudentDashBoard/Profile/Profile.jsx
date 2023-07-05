@@ -66,7 +66,8 @@ const Profile = () => {
     if (x === 0) {
       setavg(0.0);
     } else {
-      setavg(sum / x).toFixed(2);
+      const average = (sum / x).toFixed(2);
+      setavg(average);
     }
     setflag(true);
   };

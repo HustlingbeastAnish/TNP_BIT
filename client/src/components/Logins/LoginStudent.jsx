@@ -23,7 +23,6 @@ const Login = () => {
       }),
     });
     const data = await res.json();
-    // console.log(data);
     localStorage.setItem("studentUser", JSON.stringify(data));
     context.setuser(data);
     // console.log(context.user);
@@ -42,7 +41,7 @@ const Login = () => {
       });
       console.log("Successfully Logged In");
       setTimeout(() => {
-        navigate("/StudentDashBoard");
+        navigate("/StudentDashBoard/profile");
       }, 1500);
     }
   };
@@ -143,7 +142,7 @@ const Login = () => {
               </div>
             </div>
             <div>
-              <Link to="/signup">
+              <Link to="/registerstudent">
                 <a
                   href="#!"
                   className="ml-4 text-blue-600 hover:text-blue-700 focus:text-blue-700 active:text-blue-800 duration-200 transition ease-in-out"
