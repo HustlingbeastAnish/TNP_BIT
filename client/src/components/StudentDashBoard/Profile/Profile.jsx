@@ -4,10 +4,10 @@ import BottomDrawer from "../BottomDrawer/BottomDrawer";
 import { StudentContext } from "../../../../../LoginContext/StudentContext";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { Bar, Line, Pie } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
-import FormControl from "@mui/material/FormControl";
 import Loader from "../../Loader/Loader";
 const Profile = () => {
   const context = useContext(StudentContext);

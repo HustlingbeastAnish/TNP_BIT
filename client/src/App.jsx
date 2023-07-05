@@ -20,14 +20,24 @@ import Notifications from "./components/StudentDashBoard/Notifications/Notificat
 import { Root } from "postcss";
 import LoginStudent from "./components/Logins/LoginStudent";
 import LoginRecruiter from "./components/Logins/LoginRecruiter";
+import Contact from "./components/Contact/Contact";
 import Profile from "./components/StudentDashBoard/Profile/Profile";
 import PrivateRoute from "./PrivateRoutes";
+import Stats from "./components/Stats/Stats";
 function App() {
   // Declaration of Router Object
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/">
-        <Route index element={<Landing />}></Route>
+        <Route
+          index
+          element={
+            <div>
+              <Landing />
+              <Stats />
+            </div>
+          }
+        ></Route>
         <Route path="loginstudent" element={<LoginStudent />}></Route>
         <Route path="registerstudent" element={<RegisterStudent />}></Route>
         <Route path="loginrecruiter" element={<LoginRecruiter />}></Route>

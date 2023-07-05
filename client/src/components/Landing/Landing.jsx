@@ -5,6 +5,7 @@ import { useState } from "react";
 import studlogo from "../../assets/svgs/student-medium-skin-tone-svgrepo-com.svg";
 import recruiterlogo from "../../assets/svgs/job-svgrepo-com.svg";
 import { StudentContext } from "../../../../LoginContext/StudentContext";
+import Contact from "../Contact/Contact";
 
 const Landing = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
