@@ -12,6 +12,7 @@ const Signup = () => {
   const [user, setUser] = useState({
     name: "",
     email: "",
+    gender: "",
     password: "",
     phone: "",
     roll: "",
@@ -98,6 +99,35 @@ const Signup = () => {
                   className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
                 />
               </div>
+              <div className="w-full mt-2 mb-2">
+                <label
+                  htmlFor="exampleInputEmail2"
+                  className="form-label inline-block mb-2 text-white"
+                >
+                  Select Gender
+                </label>
+                <FormControl fullWidth>
+                  <Select
+                    style={{
+                      borderRadius: "8px",
+                      height: "45px",
+                      fontSize: "15px",
+                      backgroundColor: "white",
+                      borderColor: "black",
+                    }}
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={user.gender}
+                    name="gender"
+                    label="genders"
+                    onChange={handleInputChange}
+                  >
+                    <MenuItem value={"Male"}>Male</MenuItem>
+                    <MenuItem value={"Female"}>Female</MenuItem>
+                    <MenuItem value={"Others"}>Others</MenuItem>
+                  </Select>
+                </FormControl>
+              </div>
               <div className="flex flex-row">
                 <div className="mr-4 mt-2">
                   <label className="block text-white">Password</label>
@@ -152,9 +182,6 @@ const Signup = () => {
                   Select Branch
                 </label>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label font-semibold">
-                    Branch
-                  </InputLabel>
                   <Select
                     style={{
                       borderRadius: "8px",

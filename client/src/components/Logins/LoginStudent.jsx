@@ -41,7 +41,7 @@ const Login = () => {
       });
       console.log("Successfully Logged In");
       setTimeout(() => {
-        navigate("/StudentDashBoard/profile");
+        navigate("/StudentDashBoard");
       }, 1500);
     }
   };

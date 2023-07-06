@@ -24,6 +24,8 @@ import Contact from "./components/Contact/Contact";
 import Profile from "./components/StudentDashBoard/Profile/Profile";
 import PrivateRoute from "./PrivateRoutes";
 import Stats from "./components/Stats/Stats";
+import Notice from "./components/StudentDashBoard/Notice/Notice";
+import AddAcdemics from "./components/StudentDashBoard/Profile/AddAcademics/AddAcdemics";
 function App() {
   // Declaration of Router Object
   const router = createBrowserRouter(
@@ -50,11 +52,29 @@ function App() {
               </PrivateRoute>
             }
           ></Route>
+          <Route path="profile">
+            <Route
+              index
+              element={
+                <PrivateRoute>
+                  <Profile />
+                </PrivateRoute>
+              }
+            ></Route>
+            <Route
+              path="addacademics"
+              element={
+                <PrivateRoute>
+                  <AddAcdemics />
+                </PrivateRoute>
+              }
+            ></Route>
+          </Route>
           <Route
-            path="profile"
+            path="notice"
             element={
               <PrivateRoute>
-                <Profile />
+                <Notice />
               </PrivateRoute>
             }
           ></Route>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBell } from "@fortawesome/free-solid-svg-icons";
 import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 function StudentNavbar() {
   const navigate = useNavigate();
@@ -130,6 +131,25 @@ function StudentNavbar() {
                   <path d="M10 14a2 2 0 100 4 2 2 0 000-4zm0 2a1 1 0 110-2 1 1 0 010 2z"></path>
                 </svg>
                 Home
+              </a>
+            </Link>
+          </li>
+          <li className="mr-2">
+            <Link to="/studentDashBoard/notice">
+              <a
+                href="#"
+                className={`inline-flex items-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group ${
+                  activeMenuItem === "notifications"
+                    ? "text-blue-600 border-blue-600 underline"
+                    : ""
+                }`}
+                onClick={() => handleMenuItemClick("notifications")}
+              >
+                <FontAwesomeIcon
+                  icon={faBell}
+                  style={{ color: "#dfd0e2", marginRight: "8px" }}
+                />
+                Notifications
               </a>
             </Link>
           </li>
