@@ -13,6 +13,10 @@ const StudentLoginSchema = new mongoose.Schema(
       unique: [true, "Email already exists"],
       validate: [isEmail, "Please enter a valid email"],
     },
+    gender: {
+      type: String,
+      required: true,
+    },
     phone: {
       type: Number,
       required: true,

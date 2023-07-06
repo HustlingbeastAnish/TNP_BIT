@@ -1,5 +1,16 @@
+// controller.jsx
 const StudentLogin = require("../models/StudLogin.jsx");
+const Academics = require("../models/Academics.jsx");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
+// Create of token
+const maxAge = 3 * 24 * 60 * 60;
+const createToken = (id) => {
+  return jwt.sign({ id }, "tnpbit", {
+    expiresIn: maxAge,
+  });
+};
 // Error Handlers
 const handleErrors = (err) => {
   console.log(err.message, err.code);
@@ -31,13 +42,14 @@ const handleErrors = (err) => {
   }
   return errors;
 };
+
 exports.registerStudent = async (req, res) => {
-  const { name, email, phone, password, roll, branch } = req.body;
-  if (!name || !email || !phone || !password || !roll || !branch) {
+  const { name, email, gender, phone, password, roll, branch } = req.body;
+  console.log("Registering");
+  if (!name || !email || !phone || !gender || !password || !roll || !branch) {
     console.log(req.body);
     return res.status(400).json({ error: "Please fill in all the details" });
   }
-
   try {
     const userExists = await StudentLogin.findOne({ email });
     if (userExists) {
@@ -55,17 +67,83 @@ exports.registerStudent = async (req, res) => {
     const user = new StudentLogin({
       name,
       email,
+      gender,
       phone,
       password,
       roll,
       branch,
     });
 
+    // As soon as the student registers make a Academics Instance as well which can later on be editied
+    const academic = new Academics({
+      name,
+      email,
+      roll,
+      college: {},
+      school: {},
+    });
+    const academicDone = await academic.save();
     const signUp = await user.save();
-    if (signUp) {
+    if (signUp && academicDone) {
       return res.status(201).json({ message: "Registration successful" });
     } else {
       return res.status(400).json({ error: "Registration failed" });
+    }
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+exports.loginStudent = async (req, res) => {
+  try {
+    const email = req.body.email;
+    const password = req.body.password;
+    if (!email || !password) {
+      return res.status(400).json({ error: "None of the fields can be empty" });
+    }
+    const emailExists = await StudentLogin.findOne({ email: email });
+    if (emailExists) {
+      const PassMatch = await bcrypt.compare(password, emailExists.password);
+      if (!PassMatch) {
+        return res.status(400).json({ error: "Invalid credentials" });
+      } else {
+        const token = createToken(emailExists._id);
+        res.cookie("jwtoken", token, {
+          maxAge: maxAge * 1000,
+          httpOnly: true,
+        });
+        return res.json({ emailExists, token });
+      }
+    } else {
+      return res.status(400).json({ error: "Invalid credentials" });
+    }
+  } catch (err) {
+    console.log("Failed");
+    return res.status(400).json({ error: "Invalid credentials" });
+  }
+};
+
+exports.addAcademics = async (req, res) => {
+  try {
+    const { name, email, roll, college, school } = req.body;
+    if (!name || !email || !roll || !school.class10 || !school.class12) {
+      return res
+        .status(400)
+        .json({ error: "Class 10 and Class 12 feilds cannot be empty" });
+    }
+    const student = await Academics.findOne({ email });
+    student.college = college;
+    student.school = {
+      class10: school.class10,
+      class12: school.class12,
+    };
+
+    const done = await student.save();
+    if (done) {
+      return res.status(201).json({ message: "Academics Added" });
+    } else {
+      return res.status(400).json({ error: "Changes failed" });
     }
   } catch (err) {
     console.error(err);

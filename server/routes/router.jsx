@@ -1,3 +1,4 @@
+// router.jsx
 const express = require("express");
 const router = express.Router();
 const controller = require("../controller/controller.jsx");
@@ -7,5 +8,6 @@ router.get("/", (req, res) => {
 });
 
 router.post("/api/registerStudent", controller.registerStudent);
-
+router.put("/api/addacademics", controller.addAcademics);
+router.post("/api/loginStudent", controller.loginStudent);
 module.exports = router;
