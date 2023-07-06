@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 function BottomDrawer() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [bottom_width, setbottom_width] = useState(60);
+  const [bottom_width, setbottom_width] = useState(45);
   const openDrawer = () => {
     console.log("clicked");
     if (isDrawerOpen === true) {
@@ -11,10 +11,10 @@ function BottomDrawer() {
       setIsDrawerOpen(true);
     }
 
-    if (bottom_width === 350) {
-      setbottom_width(60);
-    } else if (bottom_width === 60) {
-      setbottom_width(350);
+    if (bottom_width === 325) {
+      setbottom_width(45);
+    } else if (bottom_width === 45) {
+      setbottom_width(325);
     }
   };
   return (

@@ -1,14 +1,20 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import BottomDrawer from "../../BottomDrawer/BottomDrawer";
 import StudentNavbar from "../../StudentNavbar/StudentNavbar";
 import School from "./svgs/school";
+import Swal from "sweetalert2";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import Select from "@mui/material/Select";
 import College from "./svgs/college";
+import { StudentContext } from "../../../../../../LoginContext/StudentContext";
 const AddAcdemics = () => {
+  const context = useContext(StudentContext);
+  const navigate = useNavigate();
+  console.log(context.user);
   const [updatedStud, setupdatedStud] = useState({
     class10_board: "",
     class12_board: "",
@@ -33,7 +39,6 @@ const AddAcdemics = () => {
     const value = e.target.value;
     setupdatedStud({ ...updatedStud, [name]: value });
   };
-
   const marksEdit = (e) => {
     const { name, value } = e.target;
     const regex = /^(\d{0,2}(\.\d{0,2})?)?$/; // Regex pattern for XX.XX format
@@ -46,6 +51,48 @@ const AddAcdemics = () => {
     const regex = /^\d(\.\d{0,2})?$/; // Regex pattern for X.XX format
     if (regex.test(value) || value === "" || value.length > 4) {
       setCmarks({ ...Cmarks, [name]: value.substr(0, 4) });
+    }
+  };
+
+  // Add changes callback
+  const AddChanges = async (e) => {
+    e.preventDefault();
+    const res = await fetch("http://localhost:8080/api/addacademics", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: context.user.emailExists.name,
+        email: context.user.emailExists.email,
+        roll: context.user.emailExists.roll,
+        college: Cmarks,
+        school: {
+          class10: marks.class10,
+          class10_board: updatedStud.class10_board,
+          class12: marks.class12,
+          class12_board: updatedStud.class10_board,
+        },
+      }),
+    });
+    const data = await res.json();
+    if (data.status === 400 || !data || data.error) {
+      Swal.fire({
+        title: "Bad Credentials",
+        text: "Please enter valid details",
+        icon: "error",
+        confirmButtonText: "Retry",
+      });
+    } else {
+      Swal.fire({
+        title: "Changes Saved Succesfully",
+        icon: "success",
+        timer: 1000,
+      });
+      console.log("Successfully Logged In");
+      setTimeout(() => {
+        navigate("/StudentDashBoard/profile");
+      }, 1500);
     }
   };
   return (
@@ -193,7 +240,7 @@ const AddAcdemics = () => {
                 <College />
               </div>
               <div>
-                <h2 class="text-3xl font-extrabold dark:text-white m-4">
+                <h2 className="text-3xl font-extrabold dark:text-white m-4">
                   Enter your College CGPA
                 </h2>
                 <div className="relative z-0 w-full m-2 group flex flex-col">
@@ -354,6 +401,25 @@ const AddAcdemics = () => {
               </div>
             </div>
           </form>
+          <button
+            onClick={AddChanges}
+            className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900"
+          >
+            Save Changes
+            <svg
+              aria-hidden="true"
+              className="ml-2 -mr-1 w-4 h-4"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fillRule="evenodd"
+                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                clipRule="evenodd"
+              ></path>
+            </svg>
+          </button>
         </figure>
       </div>
       <div>

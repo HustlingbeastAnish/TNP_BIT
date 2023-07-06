@@ -10,6 +10,7 @@ import { Bar, Line, Pie } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
 import Loader from "../../Loader/Loader";
 import { Link } from "react-router-dom";
+import axios from "axios";
 const Profile = () => {
   const context = useContext(StudentContext);
   const [updatedStud, setupdatedStud] = useState({
@@ -29,6 +30,12 @@ const Profile = () => {
     sem6: "0.00",
     sem7: "0.00",
     sem8: "0.00",
+  });
+  const [school, setschool] = useState({
+    class10: "",
+    class10_board: "",
+    class12: "",
+    class12_board: "",
   });
   const marksData = {
     labels: Object.keys(marks), // Generate labels dynamically from the properties of the marks object
@@ -55,7 +62,6 @@ const Profile = () => {
       setmarks({ ...marks, [name]: value.substr(0, 4) });
     }
   };
-
   const calAvg = () => {
     let x = 0;
     let sum = 0.0;
@@ -73,6 +79,28 @@ const Profile = () => {
     }
     setflag(true);
   };
+
+  const [detailsAcademic, setdetailsAcademic] = useState({});
+  const getAcademicDetails = async () => {
+    try {
+      axios
+        .get(
+          `http://localhost:8080/api/getacademics?email=${context.user.emailExists.email}`
+        )
+        .then((response) => {
+          console.log(response.data.exists);
+          const res = response.data.exists;
+          setmarks(res.college);
+          setschool(res.school);
+          setflagAcademic(true);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } catch (err) {
+      console.error(err);
+    }
+  };
   useEffect(() => {
     if (context.user) {
       setupdatedStud((prevStud) => ({
@@ -86,6 +114,10 @@ const Profile = () => {
       console.log(context.user);
     }
   }, [context.user]);
+
+  useEffect(() => {
+    getAcademicDetails();
+  }, []);
   return context.user ? (
     <div className="bg-gray-900 h-auto">
       <div>
@@ -225,7 +257,7 @@ const Profile = () => {
               </div>
             </div>
           </div>
-          {/* <BottomDrawer /> */}
+          <BottomDrawer />
         </form>
         {flagAcademic ? (
           <div>
@@ -254,14 +286,21 @@ const Profile = () => {
                     </span>
                   </h3>
                   <time class="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
-                    Released on January 13th, 2022
+                    Prusuing BTECH in {updatedStud.branch}
                   </time>
                   <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
-                    Get access to over 20+ pages including a dashboard layout,
-                    charts, kanban board, calendar, and pre-order E-commerce &
-                    Marketing pages.
+                    Birla Institute of Technology (BIT) is a prestigious
+                    technical institute in India. Established in 1955, BIT Mesra
+                    offers a wide range of undergraduate, postgraduate, and
+                    doctoral programs in various disciplines. Known for its
+                    academic excellence, research initiatives, and industry
+                    collaborations, BIT provides a holistic education,
+                    state-of-the-art infrastructure, and a vibrant campus life.
+                    It continues to be a preferred choice for students seeking
+                    quality technical education and has a strong network of
+                    successful alumni.
                   </p>
-                  <a
+                  {/* <a
                     href="#"
                     class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:outline-none focus:ring-gray-200 focus:text-blue-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700"
                   >
@@ -276,7 +315,7 @@ const Profile = () => {
                       <path d="M18 12h-2.55l-2.975 2.975a3.5 3.5 0 0 1-4.95 0L4.55 12H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2Zm-3 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z" />
                     </svg>{" "}
                     Download ZIP
-                  </a>
+                  </a> */}
                 </li>
                 <li class="mb-10 ml-6">
                   <span class="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -left-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
@@ -291,16 +330,12 @@ const Profile = () => {
                     </svg>
                   </span>
                   <h3 class="mb-1 text-lg font-semibold text-gray-900 dark:text-white">
-                    Flowbite Figma v1.3.0
+                    Completed Senior Secondary level of education from{" "}
+                    {school.class12_board}
                   </h3>
                   <time class="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
-                    Released on December 7th, 2021
+                    Secured {school.class12} % in {school.class12_board} BOARD
                   </time>
-                  <p class="text-base font-normal text-gray-500 dark:text-gray-400">
-                    All of the pages and components are first designed in Figma
-                    and we keep a parity between the two versions even as we
-                    update the project.
-                  </p>
                 </li>
                 <li class="ml-6">
                   <span class="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -left-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
@@ -315,15 +350,12 @@ const Profile = () => {
                     </svg>
                   </span>
                   <h3 class="mb-1 text-lg font-semibold text-gray-900 dark:text-white">
-                    Flowbite Library v1.2.2
+                    Completed Secondary level of education from{" "}
+                    {school.class10_board}
                   </h3>
                   <time class="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
-                    Released on December 2nd, 2021
+                    Secured {school.class10} % in {school.class10_board} BOARD
                   </time>
-                  <p class="text-base font-normal text-gray-500 dark:text-gray-400">
-                    Get started with dozens of web components and interactive
-                    elements built on top of Tailwind CSS.
-                  </p>
                 </li>
               </ol>
             </div>
