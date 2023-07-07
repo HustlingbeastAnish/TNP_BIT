@@ -39,6 +39,7 @@ function App() {
             <div>
               <Landing />
               <Stats />
+              <Contact />
               <Footer />
             </div>
           }
