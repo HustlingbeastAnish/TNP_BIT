@@ -54,6 +54,9 @@ const TaskList = () => {
       console.log(tasksRef.current);
     }
   };
+  useEffect(() => {
+    document.body.style.backgroundColor = "rgb(17 24 39)";
+  }, []);
 
   const removeTask = (id) => {
     const updatedTasks = tasks.filter((task) => task.id !== id);
@@ -62,19 +65,19 @@ const TaskList = () => {
     setFlag(tasksRef.current.length > 0);
   };
   return (
-    <div className="bg-gray-900 h-auto">
+    <div className="h-screen bg-gray-900">
       <div>
         <StudentNavbar />
       </div>
-      <div className="flex justify-center flex-col items-center m-6">
-        <h2 className="text-white text-3xl font-extrabold text-center">
+      <div className="flex flex-col m-2 justify-center items-center">
+        <h2 className="text-white text-6xl font-extrabold text-center">
           My day
         </h2>
-        <div className="flex flex-row justify-center items-center m-2">
-          <span className="bg-blue-100 m-2 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300">
+        <div className="flex flex-row justify-around items-center m-2">
+          <span className="bg-blue-100 m-2 text-blue-800 text-xl font-medium mr-2 px-5 py-2 rounded-full dark:bg-blue-900 dark:text-blue-300">
             {curr_day}
           </span>
-          <span className="bg-green-100 text-green-800 text-xs text font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">
+          <span className="bg-green-100 text-green-800 text-xl font-medium mr-2 px-5 py-2 rounded-full dark:bg-green-900 dark:text-green-300">
             {curr_date}
           </span>
         </div>
@@ -97,6 +100,7 @@ const TaskList = () => {
                   name="tasks"
                   className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                   placeholder="Add your tasks"
+                  style={{ width: "100%" }}
                   value={curr_task}
                   onChange={handleChange}
                   required
@@ -109,7 +113,12 @@ const TaskList = () => {
         {flag ? (
           <div className="relative shadow-md sm:rounded-lg">
             <div className="flex items-center justify-center pb-4"></div>
-            <table className="w-full min-w-full divide-y divide-gray-200">
+            <table className="w-full table-fixed">
+              <colgroup>
+                <col style={{ width: "10%" }} />
+                <col style={{ width: "60%" }} />
+                <col style={{ width: "10%" }} />
+              </colgroup>
               <thead>
                 <tr>
                   <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
@@ -143,10 +152,9 @@ const TaskList = () => {
                         {elem.id.split(" ")[0]}
                       </span>
                     </td>
-
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div
-                        className="text-sm font-medium flex justify-center items-center text-gray-900 dark:text-gray-200"
+                        className="text-sm font-medium text-gray-900 dark:text-gray-200"
                         onClick={() => removeTask(elem.id)}
                       >
                         <FontAwesomeIcon icon={faCircleMinus} size="xl" />
@@ -161,7 +169,7 @@ const TaskList = () => {
           <section className="bg-white dark:bg-gray-900">
             <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
               <div className="mx-auto max-w-screen-sm text-center">
-                <p className="mb-4 text-3xl tracking-tight font-bold text-gray-900 md:text-4xl dark:text-white">
+                <p className="mb-4 text-6xl tracking-tight font-extrabold text-gray-900 dark:text-white">
                   Add Events / Tasks
                 </p>
                 <p className="mb-4 text-lg font-light text-gray-500 dark:text-gray-400">
