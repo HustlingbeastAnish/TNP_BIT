@@ -48,7 +48,13 @@ const AcademicSchema = new mongoose.Schema(
       class10: {
         type: String,
       },
+      class10_board: {
+        type: String,
+      },
       class12: {
+        type: String,
+      },
+      class12_board: {
         type: String,
       },
     },
