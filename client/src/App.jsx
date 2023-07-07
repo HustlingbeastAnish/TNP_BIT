@@ -26,6 +26,7 @@ import PrivateRoute from "./PrivateRoutes";
 import Stats from "./components/Stats/Stats";
 import Notice from "./components/StudentDashBoard/Notice/Notice";
 import AddAcdemics from "./components/StudentDashBoard/Profile/AddAcademics/AddAcdemics";
+import TaskList from "./components/StudentDashBoard/TaskList/TaskList";
 function App() {
   // Declaration of Router Object
   const router = createBrowserRouter(
@@ -44,6 +45,7 @@ function App() {
         <Route path="registerstudent" element={<RegisterStudent />}></Route>
         <Route path="loginrecruiter" element={<LoginRecruiter />}></Route>
         <Route path="studentDashboard">
+          <Route path="tasklist" element={<TaskList />}></Route>
           <Route
             index
             element={
