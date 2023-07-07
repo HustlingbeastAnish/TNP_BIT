@@ -101,7 +101,6 @@ function Stats() {
             label="Branches"
             onChange={handleYear}
           >
-            <MenuItem value={2023}>2023</MenuItem>
             <MenuItem value={2022}>2022</MenuItem>
             <MenuItem value={2021}>2021</MenuItem>
             <MenuItem value={2020}>2020</MenuItem>

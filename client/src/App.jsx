@@ -27,6 +27,7 @@ import Stats from "./components/Stats/Stats";
 import Notice from "./components/StudentDashBoard/Notice/Notice";
 import AddAcdemics from "./components/StudentDashBoard/Profile/AddAcademics/AddAcdemics";
 import TaskList from "./components/StudentDashBoard/TaskList/TaskList";
+import Footer from "./components/Footer/Footer";
 function App() {
   // Declaration of Router Object
   const router = createBrowserRouter(
@@ -38,6 +39,7 @@ function App() {
             <div>
               <Landing />
               <Stats />
+              <Footer />
             </div>
           }
         ></Route>
