@@ -13,6 +13,7 @@ function StudentNavbar() {
   const Logout = () => {
     // Remove user from storage
     localStorage.removeItem("studentUser");
+    localStorage.removeItem("tasks");
     navigate("/");
   };
   return (

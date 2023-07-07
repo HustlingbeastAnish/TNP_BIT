@@ -54,10 +54,6 @@ const TaskList = () => {
       console.log(tasksRef.current);
     }
   };
-  useEffect(() => {
-    document.body.style.backgroundColor = "rgb(17 24 39)";
-  }, []);
-
   const removeTask = (id) => {
     const updatedTasks = tasks.filter((task) => task.id !== id);
     setTasks(updatedTasks);
@@ -173,7 +169,7 @@ const TaskList = () => {
                   Add Events / Tasks
                 </p>
                 <p className="mb-4 text-lg font-light text-gray-500 dark:text-gray-400">
-                  Organize your events and tasks like a pro
+                  "Seize the day, one task at a time!"
                 </p>
               </div>
             </div>
