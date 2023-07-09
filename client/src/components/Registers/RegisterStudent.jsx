@@ -14,6 +14,7 @@ const Signup = () => {
     email: "",
     gender: "",
     password: "",
+    confirmPassword: "",
     phone: "",
     roll: "",
     branch: "",
@@ -26,7 +27,16 @@ const Signup = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-
+    if (user.confirmPassword !== user.password) {
+      // Handle error response
+      Swal.fire({
+        title: "Confirm Password should be same as password",
+        text: "Password and confirm password has to be same",
+        icon: "error",
+        confirmButtonText: "Retry",
+      });
+      return;
+    }
     // Validate the form fields here
     try {
       const response = await fetch(
@@ -145,6 +155,9 @@ const Signup = () => {
                   <input
                     type="password"
                     id="confirmPassword"
+                    name="confirmPassword"
+                    value={user.confirmPassword}
+                    onChange={handleInputChange}
                     placeholder="Confirm Password"
                     className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
                   />

@@ -185,7 +185,7 @@ const Profile = () => {
       </div>
       <div>
         <form className="m-10">
-          <h2 class="text-4xl font-extrabold dark:text-white">
+          <h2 className="text-4xl font-extrabold dark:text-white">
             Personal Details
           </h2>
           <div className="relative z-0 w-full mb-6 group">
@@ -318,7 +318,7 @@ const Profile = () => {
             </div>
             <button
               type="button"
-              class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg m-2 dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
+              className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg m-2 dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
               onClick={saveChanges}
             >
               Save Changes
@@ -329,15 +329,15 @@ const Profile = () => {
         {flagAcademic ? (
           <div>
             <div>
-              <h2 class="text-4xl font-extrabold dark:text-white m-10">
+              <h2 className="text-4xl font-extrabold dark:text-white m-10">
                 Academic Details
               </h2>
 
-              <ol class="relative border-l border-gray-200 dark:border-gray-700 m-10">
-                <li class="mb-10 ml-6">
-                  <span class="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -left-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
+              <ol className="relative border-l border-gray-200 dark:border-gray-700 m-10">
+                <li className="mb-10 ml-6">
+                  <span className="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -left-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
                     <svg
-                      class="w-2.5 h-2.5 text-blue-800 dark:text-blue-300"
+                      className="w-2.5 h-2.5 text-blue-800 dark:text-blue-300"
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="currentColor"
@@ -346,16 +346,16 @@ const Profile = () => {
                       <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
                     </svg>
                   </span>
-                  <h3 class="flex items-center mb-1 text-lg font-semibold text-gray-900 dark:text-white">
+                  <h3 className="flex items-center mb-1 text-lg font-semibold text-gray-900 dark:text-white">
                     Birla Institute of Technology Mesra, Ranchi
-                    <span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300 ml-3">
+                    <span className="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300 ml-3">
                       Present
                     </span>
                   </h3>
-                  <time class="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+                  <time className="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
                     Prusuing BTECH in {updatedStud.branch}
                   </time>
-                  <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+                  <p className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
                     Birla Institute of Technology (BIT) is a prestigious
                     technical institute in India. Established in 1955, BIT Mesra
                     offers a wide range of undergraduate, postgraduate, and
@@ -368,10 +368,10 @@ const Profile = () => {
                     successful alumni.
                   </p>
                 </li>
-                <li class="mb-10 ml-6">
-                  <span class="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -left-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
+                <li className="mb-10 ml-6">
+                  <span className="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -left-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
                     <svg
-                      class="w-2.5 h-2.5 text-blue-800 dark:text-blue-300"
+                      className="w-2.5 h-2.5 text-blue-800 dark:text-blue-300"
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="currentColor"
@@ -380,18 +380,18 @@ const Profile = () => {
                       <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
                     </svg>
                   </span>
-                  <h3 class="mb-1 text-lg font-semibold text-gray-900 dark:text-white">
+                  <h3 className="mb-1 text-lg font-semibold text-gray-900 dark:text-white">
                     Completed Senior Secondary level of education from{" "}
                     {school.class12_board}
                   </h3>
-                  <time class="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+                  <time className="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
                     Secured {school.class12} % in {school.class12_board} BOARD
                   </time>
                 </li>
-                <li class="ml-6">
-                  <span class="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -left-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
+                <li className="ml-6">
+                  <span className="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -left-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
                     <svg
-                      class="w-2.5 h-2.5 text-blue-800 dark:text-blue-300"
+                      className="w-2.5 h-2.5 text-blue-800 dark:text-blue-300"
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="currentColor"
@@ -400,18 +400,18 @@ const Profile = () => {
                       <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
                     </svg>
                   </span>
-                  <h3 class="mb-1 text-lg font-semibold text-gray-900 dark:text-white">
+                  <h3 className="mb-1 text-lg font-semibold text-gray-900 dark:text-white">
                     Completed Secondary level of education from{" "}
                     {school.class10_board}
                   </h3>
-                  <time class="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+                  <time className="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
                     Secured {school.class10} % in {school.class10_board} BOARD
                   </time>
                 </li>
               </ol>
             </div>
             <form className="m-10">
-              <h2 class="text-4xl font-extrabold dark:text-white">
+              <h2 className="text-4xl font-extrabold dark:text-white">
                 Academic Details
               </h2>
               <div className="relative z-0 w-full mb-6 group flex flex-col">
@@ -572,14 +572,14 @@ const Profile = () => {
                   <button
                     type="button"
                     onClick={calAvg}
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                   >
                     Get CGPA
                   </button>
                   {flag && (
                     <button
                       type="button"
-                      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                      className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                     >
                       {avg}
                     </button>
@@ -613,22 +613,22 @@ const Profile = () => {
             </form>
           </div>
         ) : (
-          <section class="bg-white dark:bg-gray-900">
-            <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
-              <div class="mx-auto max-w-screen-sm text-center">
-                <h1 class="mb-4 text-7xl tracking-tight font-extrabold lg:text-9xl text-white dark:text-primary-500">
+          <section className="bg-white dark:bg-gray-900">
+            <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+              <div className="mx-auto max-w-screen-sm text-center">
+                <h1 className="mb-4 text-7xl tracking-tight font-extrabold lg:text-9xl text-white dark:text-primary-500">
                   Oops
                 </h1>
-                <p class="mb-4 text-3xl tracking-tight font-bold text-gray-900 md:text-4xl dark:text-white">
+                <p className="mb-4 text-3xl tracking-tight font-bold text-gray-900 md:text-4xl dark:text-white">
                   Academic Details is missing
                 </p>
-                <p class="mb-4 text-lg font-light text-gray-500 dark:text-gray-400">
+                <p className="mb-4 text-lg font-light text-gray-500 dark:text-gray-400">
                   Complete the Academic Sections
                 </p>
                 <Link to="/studentDashBoard/profile/addacademics">
                   <button
                     type="button"
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                   >
                     Complete
                   </button>

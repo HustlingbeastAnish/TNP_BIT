@@ -24,7 +24,7 @@ const Login = () => {
     });
     const data = await res.json();
     localStorage.setItem("studentUser", JSON.stringify(data));
-    context.setuser(data);
+    context.setUser(data);
     // console.log(context.user);
     if (data.status === 400 || !data || data.error) {
       Swal.fire({

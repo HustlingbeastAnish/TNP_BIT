@@ -12,7 +12,7 @@ const PrivateRoute = ({ children }) => {
     // Simulating a delay to fetch context.user
     setTimeout(() => {
       setLoading(false);
-    }, 2000); // Adjust the delay as needed
+    }, !context.user); // Adjust the delay as needed
   }, []);
 
   if (loading) {
