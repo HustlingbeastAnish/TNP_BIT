@@ -111,7 +111,7 @@ const TaskList = () => {
           <div className="relative shadow-md sm:rounded-lg">
             <div className="flex items-center justify-center pb-4"></div>
             <div className="overflow-x-auto">
-              <table className="w-full table-fixed">
+              <table className="w-full lg:table-fixed">
                 <colgroup>
                   <col style={{ width: "10%" }} />
                   <col style={{ width: "60%" }} />
@@ -119,13 +119,13 @@ const TaskList = () => {
                 </colgroup>
                 <thead>
                   <tr>
-                    <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+                    <th className="px-6 py-3 bg-gray-50 text-left text-xs md:text-sm lg:text-sm font-medium text-black uppercase tracking-wider">
                       Status
                     </th>
-                    <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+                    <th className="px-6 py-3 bg-gray-50 text-left text-xs md:text-sm lg:text-sm font-medium text-black uppercase tracking-wider">
                       Tasks
                     </th>
-                    <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+                    <th className="px-6 py-3 bg-gray-50 text-left text-xs md:text-sm lg:text-sm font-medium text-black uppercase tracking-wider">
                       Action
                     </th>
                   </tr>
@@ -140,19 +140,19 @@ const TaskList = () => {
                         />
                       </td>
                       <td className="px-6 py-4 whitespace-wrap">
-                        <div className="text-sm font-medium text-gray-900 dark:text-gray-200 max-w-96 break-all">
+                        <div className="text-sm md:text-base lg:text-base font-medium text-gray-900 dark:text-gray-200 max-w-96 break-all">
                           {elem.task}
                         </div>
-                        <span className="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">
+                        <span className="bg-green-100 text-green-800 text-xs md:text-sm lg:text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">
                           {elem.id.split(" ")[1]}
                         </span>
-                        <span className="bg-yellow-100 text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300">
+                        <span className="bg-yellow-100 text-yellow-800 text-xs md:text-sm lg:text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300">
                           {elem.id.split(" ")[0]}
                         </span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div
-                          className="text-sm font-medium text-gray-900 dark:text-gray-200"
+                          className="text-sm md:text-base lg:text-base font-medium text-gray-900 dark:text-gray-200"
                           onClick={() => removeTask(elem.id)}
                         >
                           <FontAwesomeIcon icon={faCircleMinus} size="xl" />
