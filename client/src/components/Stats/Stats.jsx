@@ -78,7 +78,10 @@ function Stats() {
     setHighestPackage(placedata[0][selectedYear].highest);
   };
   return (
-    <div className="flex justify-center flex-col items-center bg-gray-900">
+    <div
+      className="flex justify-center flex-col items-center bg-gray-900"
+      id="stats"
+    >
       <h1 class="mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl">
         <span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
           Placement Stats
@@ -144,10 +147,12 @@ function Stats() {
           </a>
         </div>
       </div>
-      <div>
+      <div style={{ width: "100%", height: "400px", maxWidth: "800px" }}>
         <Bar
           data={placementData}
           options={{
+            maintainAspectRatio: true,
+            // aspectRatio: 3, // Adjust this value to maintain the desired aspect ratio
             plugins: {
               legend: {
                 labels: {
@@ -157,18 +162,13 @@ function Stats() {
                 },
               },
             },
-            indexAxis: "x", // Set the indexAxis to 'x' to make the bars horizontal
-            layout: {
-              padding: {
-                left: 50, // Adjust the left padding to make the graph narrower
-                right: 20, // Adjust the right padding
-                top: 20, // Adjust the top padding
-                bottom: 50, // Adjust the bottom padding to make the graph shorter
-              },
-            },
+            indexAxis: "x",
             scales: {
               x: {
-                maxBarThickness: 50, // Adjust the maximum bar thickness (width)
+                maxBarThickness: 50,
+              },
+              y: {
+                beginAtZero: true,
               },
             },
           }}

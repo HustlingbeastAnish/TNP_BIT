@@ -9,7 +9,7 @@ function Footer() {
             <div class="mb-6 md:mb-0">
               <a href="https://flowbite.com/" class="flex items-center">
                 <img src={bitlogo} class="h-8 mr-3" alt="FlowBite Logo" />
-                <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
+                <span class="self-center text-sm font-semibold whitespace-nowrap dark:text-white">
                   Birla Institute of Technology Mesra, Ranchi
                 </span>
               </a>
