@@ -3,6 +3,7 @@ import StudentNavbar from "../StudentNavbar/StudentNavbar";
 import BottomDrawer from "../BottomDrawer/BottomDrawer";
 import { StudentContext } from "../../../../../LoginContext/StudentContext";
 import MenuItem from "@mui/material/MenuItem";
+import Swal from "sweetalert2";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
@@ -18,7 +19,6 @@ const Profile = () => {
     email: "",
     phone: "",
     branch: "",
-    roll: "",
   });
 
   const [marks, setmarks] = useState({
@@ -53,7 +53,11 @@ const Profile = () => {
   const [avg, setavg] = useState(0.0);
   const handleEdit = (e) => {
     const { name, value } = e.target;
-    setupdatedStud({ ...updatedStud, [name]: value });
+    if (name === "phone") {
+      const phoneNumber = value.replace(/\D/g, "");
+      const trimmedPhoneNumber = phoneNumber.slice(0, 10);
+      setupdatedStud({ ...updatedStud, [name]: trimmedPhoneNumber });
+    } else setupdatedStud({ ...updatedStud, [name]: value });
   };
   const marksEdit = (e) => {
     const { name, value } = e.target;
@@ -79,8 +83,56 @@ const Profile = () => {
     }
     setflag(true);
   };
-
-  const [detailsAcademic, setdetailsAcademic] = useState({});
+  const saveChanges = async (e) => {
+    e.preventDefault();
+    const { name, email, phone, branch } = updatedStud;
+    const res = await fetch(`http://localhost:8080/api/edituser`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        phone: phone,
+        roll: context.user.emailExists.roll,
+        branch: branch,
+      }),
+    });
+    const data = await res.json();
+    if (
+      data.status === 422 ||
+      data.status === 400 ||
+      data.status === 404 ||
+      data.status === 500
+    ) {
+      Swal.fire({
+        title: "Bad Credentials",
+        text: "Please fill in all details",
+        icon: "error",
+        confirmButtonText: "Retry",
+      });
+    }
+    if (!data || data.error) {
+      Swal.fire({
+        title: "Please Complete Profile Details",
+        text: "User Already Exists with required fields",
+        icon: "error",
+        confirmButtonText: "Retry",
+      });
+    } else {
+      const updatedUser = { ...context.user };
+      updatedUser.emailExists.name = name;
+      updatedUser.emailExists.email = email;
+      updatedUser.emailExists.phone = phone;
+      updatedUser.emailExists.branch = branch;
+      context.setUser(updatedUser); // Use setUser function from the context to update the user
+      Swal.fire({
+        title: "Updation Successful",
+        icon: "success",
+        timer: 1000,
+      });
+      navigate("/studentDashboard");
+    }
+  };
   const getAcademicDetails = async () => {
     try {
       axios
@@ -206,7 +258,7 @@ const Profile = () => {
                   id="roll"
                   name="roll"
                   value={updatedStud.roll}
-                  onChange={handleEdit}
+                  // onChange={handleEdit}
                   className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                   placeholder="Enter your email"
                   required
@@ -264,6 +316,13 @@ const Profile = () => {
                 </FormControl>
               </div>
             </div>
+            <button
+              type="button"
+              class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg m-2 dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
+              onClick={saveChanges}
+            >
+              Save Changes
+            </button>
           </div>
           <BottomDrawer />
         </form>

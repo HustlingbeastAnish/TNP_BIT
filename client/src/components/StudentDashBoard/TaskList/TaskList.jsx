@@ -11,17 +11,18 @@ const TaskList = () => {
   const yy = today.getFullYear();
   const curr_date = `${dd}/${mm}/${yy}`;
   const arr = [
+    "Sunday",
     "Monday",
     "Tuesday",
     "Wednesday",
     "Thursday",
     "Friday",
     "Saturday",
-    "Sunday",
   ];
 
-  const curr_day = arr[d - 1];
-  const [flag, setFlag, flagRef] = useState(true);
+  const curr_day = arr[d];
+  console.log(d);
+  const [flag, setFlag, flagRef] = useState(false);
   const [tasks, setTasks, tasksRef] = useState([]);
   const [curr_task, setCurrTask, curr_taskRef] = useState("");
 
