@@ -204,3 +204,33 @@ exports.addTasks = async (req, res) => {
     return res.status(500).json({ error: "Internal server error" });
   }
 };
+exports.editUser = async (req, res) => {
+  try {
+    const { name, email, phone, roll, branch } = req.body;
+    if (!name || !email || !phone || !roll || !branch) {
+      return res.status(400).json({ error: "None of the fields can be empty" });
+    }
+    const rollExists = await StudentLogin.findOne({ roll: roll });
+    console.log("rollExists:", rollExists);
+    if (!rollExists) {
+      return res
+        .status(404)
+        .send({ message: `User with roll ${roll} not found` });
+    }
+    (rollExists.name = name),
+      (rollExists.phone = phone),
+      (rollExists.email = email);
+    rollExists.branch = branch;
+
+    const done = await rollExists.save();
+    if (done) {
+      return res.status(201).json({ message: "Edits Done" });
+    } else {
+      return res.status(400).json({ error: "Not Edited" });
+    }
+    // return res.json(rollExists);
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};

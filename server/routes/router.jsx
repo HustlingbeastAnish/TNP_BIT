@@ -10,6 +10,7 @@ router.get("/", (req, res) => {
 router.post("/api/registerStudent", controller.registerStudent);
 router.put("/api/addacademics", controller.addAcademics);
 router.put("/api/addtasks", controller.addTasks);
+router.put("/api/edituser", controller.editUser);
 router.get("/api/getacademics", controller.getAcademics);
 router.post("/api/loginStudent", controller.loginStudent);
 module.exports = router;

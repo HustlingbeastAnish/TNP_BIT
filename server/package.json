@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.jsx",
   "scripts": {
-    "start": "nodemon server.jsx",
+    "start": "node server.jsx",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

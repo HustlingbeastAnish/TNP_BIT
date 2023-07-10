@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { isEmail } = require("validator");
+
 const TasksSchema = new mongoose.Schema(
   {
     email: {
@@ -14,8 +15,7 @@ const TasksSchema = new mongoose.Schema(
       unique: [true, "Roll number already exists"],
     },
     taskslist: {
-      type: Map,
-      of: [String],
+      type: Object,
       default: {},
     },
   },
