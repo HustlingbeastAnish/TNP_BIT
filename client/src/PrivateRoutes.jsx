@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Route, Navigate } from "react-router-dom";
-import { StudentContext } from "../../LoginContext/StudentContext";
+import { StudentContext } from "../LoginContext/StudentContext";
 import { useContext } from "react";
 import Loader from "./components/Loader/Loader";
 

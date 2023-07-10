@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import StudentNavbar from "../StudentNavbar/StudentNavbar";
 import BottomDrawer from "../BottomDrawer/BottomDrawer";
-import { StudentContext } from "../../../../../LoginContext/StudentContext";
+import { StudentContext } from "../../../../LoginContext/StudentContext";
 import MenuItem from "@mui/material/MenuItem";
 import Swal from "sweetalert2";
 import InputLabel from "@mui/material/InputLabel";

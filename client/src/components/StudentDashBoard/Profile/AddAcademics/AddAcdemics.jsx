@@ -10,7 +10,7 @@ import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import Select from "@mui/material/Select";
 import College from "./svgs/college";
-import { StudentContext } from "../../../../../../LoginContext/StudentContext";
+import { StudentContext } from "../../../../../LoginContext/StudentContext";
 const AddAcdemics = () => {
   const context = useContext(StudentContext);
   const navigate = useNavigate();

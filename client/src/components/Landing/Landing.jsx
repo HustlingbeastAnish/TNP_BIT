@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import studlogo from "../../assets/svgs/student-medium-skin-tone-svgrepo-com.svg";
 import recruiterlogo from "../../assets/svgs/job-svgrepo-com.svg";
-import { StudentContext } from "../../../../LoginContext/StudentContext";
+import { StudentContext } from "../../../LoginContext/StudentContext";
 import bitmesrabg from "./images/bitmesrabg.jpg";
 const Landing = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import studlogo from "../../assets/svgs/student-medium-skin-tone-svgrepo-com.svg";
-import { StudentContext } from "../../../../LoginContext/StudentContext";
+import { StudentContext } from "../../../LoginContext/StudentContext";
 const Login = () => {
   const navigate = useNavigate();
   const [email, setemail] = useState("");
