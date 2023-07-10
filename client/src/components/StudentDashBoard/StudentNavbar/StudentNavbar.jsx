@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import useState from "react-usestateref";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-solid-svg-icons";
 import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { StudentContext } from "../../../../LoginContext/StudentContext";
 
 function StudentNavbar() {
+  const context = useContext(StudentContext);
   const navigate = useNavigate();
   const [activeMenuItem, setActiveMenuItem, activeMenuItemRef] = useState("");
 
@@ -17,6 +19,7 @@ function StudentNavbar() {
   const Logout = () => {
     // Remove user from storage
     localStorage.removeItem("studentUser");
+    context.setUser(null);
     localStorage.removeItem("tasks");
     navigate("/");
   };
