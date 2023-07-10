@@ -57,7 +57,7 @@ const AddAcdemics = () => {
   // Add changes callback
   const AddChanges = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:8080/api/addacademics", {
+    const res = await fetch("https://tnpbit.onrender.com/api/addacademics", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

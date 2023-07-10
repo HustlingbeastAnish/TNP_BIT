@@ -10,9 +10,10 @@ import Select from "@mui/material/Select";
 import { Bar, Line, Pie } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
 import Loader from "../../Loader/Loader";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 const Profile = () => {
+  const navigate = useNavigate();
   const context = useContext(StudentContext);
   const [updatedStud, setupdatedStud] = useState({
     name: "",
@@ -86,7 +87,7 @@ const Profile = () => {
   const saveChanges = async (e) => {
     e.preventDefault();
     const { name, email, phone, branch } = updatedStud;
-    const res = await fetch(`http://localhost:8080/api/edituser`, {
+    const res = await fetch(`https://tnpbit.onrender.com/api/edituser`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -137,10 +138,10 @@ const Profile = () => {
     try {
       axios
         .get(
-          `http://localhost:8080/api/getacademics?email=${context.user.emailExists.email}`
+          `https://tnpbit.onrender.com/api/getacademics?email=${context.user.emailExists.email}`
         )
         .then((response) => {
-          console.log(response.data.exists);
+          // console.log(response.data.exists);
           const res = response.data.exists;
           try {
             if (!res.school || !res.college) {
@@ -171,7 +172,7 @@ const Profile = () => {
         branch: context.user.emailExists.branch,
         roll: context.user.emailExists.roll,
       }));
-      console.log(context.user);
+      // console.log(context.user);
     }
   }, [context.user]);
 

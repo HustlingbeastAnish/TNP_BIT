@@ -21,7 +21,6 @@ const TaskList = () => {
   ];
 
   const curr_day = arr[d];
-  console.log(d);
   const [flag, setFlag, flagRef] = useState(false);
   const [tasks, setTasks, tasksRef] = useState([]);
   const [curr_task, setCurrTask, curr_taskRef] = useState("");
@@ -51,8 +50,6 @@ const TaskList = () => {
       localStorage.setItem("tasks", JSON.stringify(tasksRef.current));
       setFlag(tasksRef.current.length > 0);
       setCurrTask("");
-
-      console.log(tasksRef.current);
     }
   };
   const removeTask = (id) => {
