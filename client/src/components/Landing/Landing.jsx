@@ -14,8 +14,6 @@ const Landing = () => {
   };
 
   const [flag, setflag] = useState(false);
-
-  setTimeout;
   const context = useContext(StudentContext);
   console.log(context.user);
   return (
