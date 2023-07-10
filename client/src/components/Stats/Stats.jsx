@@ -4,6 +4,8 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { Bar, Line, Pie } from "react-chartjs-2";
+import { HashLink } from "react-router-hash-link";
+
 function Stats() {
   const placedata = [
     {

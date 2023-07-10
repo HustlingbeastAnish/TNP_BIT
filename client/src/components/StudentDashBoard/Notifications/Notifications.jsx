@@ -57,7 +57,7 @@ const Notifications = () => {
       {flag ? (
         <div className="bg-gray-900 h-auto">
           {isMediumScreenOrLess ? (
-            <div className="grid grid-cols-2 gap-4 px-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 px-4">
               {Arr.map((item, index) => (
                 <div
                   key={index}
