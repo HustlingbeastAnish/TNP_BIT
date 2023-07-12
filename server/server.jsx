@@ -7,31 +7,34 @@ const ConnectDB = require("./connection/connection.jsx");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
-
+const bodyParser = require("body-parser");
 // Parse JSON request bodies
 app.use(express.json());
 // Parse cookies
 app.use(cookieParser());
 
+// Enables parsing of rich objects and arrays in the URL-encoded format.
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 // Enable CORS
-app.use(function (req, res, next) {
-  // Set the allowed origin(s)
-  res.header("Access-Control-Allow-Origin", "http://127.0.0.1:5173");
+const cors = require("cors");
+app.use("*", cors({ credentials: true, origin: true }));
 
-  // Set the allowed headers
-  res.header(
+// CORS middleWare
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
     "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
+    "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
   );
-
-  // Set the allowed methods
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-
-  // Set the value of Access-Control-Allow-Credentials to true
-  res.header("Access-Control-Allow-Credentials", "true");
-
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+  );
   next();
 });
+
 // Morgan in the backend to generate request logs
 app.use(morgan("tiny"));
 
