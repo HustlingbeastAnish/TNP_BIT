@@ -1,10 +1,42 @@
-import React from "react";
+import React, { useContext } from "react";
 import StudentNavbar from "./StudentNavbar/StudentNavbar";
 import BottomDrawer from "./BottomDrawer/BottomDrawer";
 import Profile from "./svgs/profile";
 import Job from "./svgs/job";
 import Todo from "./svgs/todo";
-function StudentDashboard() {
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { StudentContext } from "../../../LoginContext/StudentContext";
+
+const StudentDashboard = () => {
+  const context = useContext(StudentContext);
+  // console.log(context.user);
+  const navigate = useNavigate();
+  const callSlogin = async () => {
+    try {
+      const res = await fetch("http://localhost:8080/afterslogin", {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+      const data = await res.json();
+      context.setUser(data);
+      if (res.status !== 200) {
+        const error = new Error(res.error);
+        throw error;
+      }
+    } catch (err) {
+      navigate("/loginstudent");
+      console.log(err);
+    }
+  };
+  useEffect(() => {
+    callSlogin();
+  }, []);
+
   return (
     <div className="bg-gray-900 h-screen">
       <div>
@@ -26,7 +58,7 @@ function StudentDashboard() {
                   type="button"
                   className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-r-md hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
                   onClick={() =>
-                    (window.location.href = "https://tp.bitmesra.co.in/SOP.pdf")
+                    window.open("https://tp.bitmesra.co.in/SOP.pdf", "_blank")
                   }
                 >
                   <svg
@@ -51,8 +83,10 @@ function StudentDashboard() {
                   type="button"
                   className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-r-md hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
                   onClick={() =>
-                    (window.location.href =
-                      "https://tp.bitmesra.co.in/Attendance%20Template%20for%20Students.pdf")
+                    window.open(
+                      "https://tp.bitmesra.co.in/Attendance%20Template%20for%20Students.pdf",
+                      "_blank"
+                    )
                   }
                 >
                   <svg
@@ -181,6 +215,6 @@ function StudentDashboard() {
       </div>
     </div>
   );
-}
+};
 
 export default StudentDashboard;

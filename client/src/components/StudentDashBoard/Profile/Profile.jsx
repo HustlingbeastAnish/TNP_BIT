@@ -14,12 +14,39 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 const Profile = () => {
   const navigate = useNavigate();
+  const callSlogin = async () => {
+    try {
+      const res = await fetch("http://localhost:8080/afterslogin", {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+      const data = await res.json();
+      context.setUser(data);
+      if (!res.status === 200) {
+        const error = new Error(res.error);
+        throw error;
+      }
+    } catch (err) {
+      navigate("/loginstudent");
+    }
+  };
+
+  useEffect(() => {
+    callSlogin();
+  }, []);
+
   const context = useContext(StudentContext);
+  console.log(context.user);
   const [updatedStud, setupdatedStud] = useState({
     name: "",
     email: "",
     phone: "",
     branch: "",
+    roll: "",
   });
 
   const [marks, setmarks] = useState({
@@ -87,14 +114,14 @@ const Profile = () => {
   const saveChanges = async (e) => {
     e.preventDefault();
     const { name, email, phone, branch } = updatedStud;
-    const res = await fetch(`https://tnpbit.onrender.com/api/edituser`, {
+    const res = await fetch(`http://localhost:8080/api/edituser`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         name: name,
         email: email,
         phone: phone,
-        roll: context.user.emailExists.roll,
+        roll: updatedStud.roll,
         branch: branch,
       }),
     });
@@ -121,10 +148,10 @@ const Profile = () => {
       });
     } else {
       const updatedUser = { ...context.user };
-      updatedUser.emailExists.name = name;
-      updatedUser.emailExists.email = email;
-      updatedUser.emailExists.phone = phone;
-      updatedUser.emailExists.branch = branch;
+      updatedUser.name = name;
+      updatedUser.email = email;
+      updatedUser.phone = phone;
+      updatedUser.branch = branch;
       context.setUser(updatedUser); // Use setUser function from the context to update the user
       Swal.fire({
         title: "Updation Successful",
@@ -138,10 +165,9 @@ const Profile = () => {
     try {
       axios
         .get(
-          `https://tnpbit.onrender.com/api/getacademics?email=${context.user.emailExists.email}`
+          `http://localhost:8080/api/getacademics?email=${context.user.email}`
         )
         .then((response) => {
-          // console.log(response.data.exists);
           const res = response.data.exists;
           try {
             if (!res.school || !res.college) {
@@ -166,11 +192,11 @@ const Profile = () => {
     if (context.user) {
       setupdatedStud((prevStud) => ({
         ...prevStud,
-        name: context.user.emailExists.name,
-        email: context.user.emailExists.email,
-        phone: context.user.emailExists.phone,
-        branch: context.user.emailExists.branch,
-        roll: context.user.emailExists.roll,
+        name: context.user.name,
+        email: context.user.email,
+        phone: context.user.phone,
+        branch: context.user.branch,
+        roll: context.user.roll,
       }));
       // console.log(context.user);
     }

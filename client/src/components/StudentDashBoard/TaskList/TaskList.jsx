@@ -4,6 +4,33 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus, faCircleMinus } from "@fortawesome/free-solid-svg-icons";
 import useState from "react-usestateref";
 const TaskList = () => {
+  const navigate = useNavigate();
+  const callSlogin = async () => {
+    try {
+      const res = await fetch("http://localhost:8080/afterslogin", {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+      const data = await res.json();
+
+      context.setUser(data);
+      if (!res.status === 200) {
+        const error = new Error(res.error);
+        throw error;
+      }
+    } catch (err) {
+      navigate("/loginstudent");
+    }
+  };
+
+  useEffect(() => {
+    callSlogin();
+  }, []);
+
   const today = new Date();
   const dd = today.getDate();
   const mm = today.getMonth() + 1;

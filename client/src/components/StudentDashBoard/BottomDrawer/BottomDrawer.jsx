@@ -39,8 +39,8 @@ function BottomDrawer() {
             <span className="absolute w-12 h-1 -translate-x-1/2 bg-gray-300 rounded-lg top-4 left-1/2 dark:bg-gray-600"></span>
           </button>
         </div>
-        <div className="grid grid-cols-2 gap-4 p-4 lg:grid-cols-3">
-          <div className="p-4 rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 dark:hover:bg-gray-600 dark:bg-gray-700">
+        <div className="grid grid-cols-1 gap-4 p-4 lg:grid-cols-2">
+          {/* <div className="p-4 rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 dark:hover:bg-gray-600 dark:bg-gray-700">
             <HashLink smooth to="/#stats">
               <div className="flex justify-center items-center p-2 mx-auto mb-2 max-w-[48px] bg-gray-200 dark:bg-gray-500 rounded-full w-18 h-18">
                 <svg
@@ -58,7 +58,7 @@ function BottomDrawer() {
                 Stats
               </div>
             </HashLink>
-          </div>
+          </div> */}
           <div className="p-4 rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 dark:hover:bg-gray-600 dark:bg-gray-700">
             <Link to="/studentDashboard/notice">
               <div className="flex justify-center items-center p-2 mx-auto mb-2 max-w-[48px] bg-gray-200 dark:bg-gray-500 rounded-full w-18 h-18">
@@ -104,7 +104,7 @@ function BottomDrawer() {
               </div>
             </Link>
           </div>
-          <div className="p-4 rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 dark:hover:bg-gray-600 dark:bg-gray-700">
+          {/* <div className="p-4 rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 dark:hover:bg-gray-600 dark:bg-gray-700">
             <HashLink smooth to="/#contact">
               <div className="flex justify-center items-center p-2 mx-auto mb-2 max-w-[48px] bg-gray-200 dark:bg-gray-500 rounded-full w-18 h-18">
                 <svg
@@ -126,7 +126,7 @@ function BottomDrawer() {
                 Contacts
               </div>
             </HashLink>
-          </div>
+          </div> */}
           <div className="p-4 rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 dark:hover:bg-gray-600 dark:bg-gray-700">
             <Link to="/studentDashboard/profile">
               <div className="flex justify-center items-center p-2 mx-auto mb-2 max-w-[48px] bg-gray-200 dark:bg-gray-500 rounded-full w-18 h-18">

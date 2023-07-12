@@ -40,7 +40,7 @@ const Signup = () => {
     // Validate the form fields here
     try {
       const response = await fetch(
-        "https://tnpbit.onrender.com/api/registerStudent",
+        "http://localhost:8080/api/registerStudent",
         {
           method: "POST",
           headers: {

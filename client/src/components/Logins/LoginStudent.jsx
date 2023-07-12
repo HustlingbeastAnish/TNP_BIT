@@ -4,6 +4,8 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 import studlogo from "../../assets/svgs/student-medium-skin-tone-svgrepo-com.svg";
 import { StudentContext } from "../../../LoginContext/StudentContext";
+import Cookies from "js-cookie";
+
 const Login = () => {
   const navigate = useNavigate();
   const [email, setemail] = useState("");
@@ -12,7 +14,7 @@ const Login = () => {
   const PostLogIn = async (e) => {
     e.preventDefault();
 
-    const res = await fetch("https://tnpbit.onrender.com/api/loginStudent", {
+    const res = await fetch("http://localhost:8080/api/loginStudent", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -23,9 +25,12 @@ const Login = () => {
       }),
     });
     const data = await res.json();
-    localStorage.setItem("studentUser", JSON.stringify(data));
-    context.setUser(data);
-    // console.log(context.user);
+    console.log(data);
+    Cookies.set("jwtoken", data.token);
+    // Cookies.set("studentUser", data.emailExists);
+    // localStorage.setItem("studentUser", JSON.stringify(data.emailExists));
+    context.setUser(data.emailExists);
+    console.log(context.user);
     if (data.status === 400 || !data || data.error) {
       Swal.fire({
         title: "Bad Credentials",

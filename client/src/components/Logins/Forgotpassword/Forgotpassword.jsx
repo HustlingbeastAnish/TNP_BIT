@@ -60,9 +60,6 @@ const Forgotpass = (props) => {
     } else {
       console.log("Verification in process");
       navigate("/resetpassword");
-      props.SetLink(data.message);
-      setFlag(true);
-      console.log(props.link);
     }
   };
   useEffect(() => {

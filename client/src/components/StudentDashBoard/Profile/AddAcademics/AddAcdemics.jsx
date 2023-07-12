@@ -14,6 +14,31 @@ import { StudentContext } from "../../../../../LoginContext/StudentContext";
 const AddAcdemics = () => {
   const context = useContext(StudentContext);
   const navigate = useNavigate();
+  const callSlogin = async () => {
+    try {
+      const res = await fetch("http://localhost:8080/afterslogin", {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+      const data = await res.json();
+
+      context.setUser(data);
+      if (!res.status === 200) {
+        const error = new Error(res.error);
+        throw error;
+      }
+    } catch (err) {
+      navigate("/loginstudent");
+    }
+  };
+
+  useEffect(() => {
+    callSlogin();
+  }, []);
   console.log(context.user);
   const [updatedStud, setupdatedStud] = useState({
     class10_board: "",
@@ -57,7 +82,7 @@ const AddAcdemics = () => {
   // Add changes callback
   const AddChanges = async (e) => {
     e.preventDefault();
-    const res = await fetch("https://tnpbit.onrender.com/api/addacademics", {
+    const res = await fetch("http://localhost:8080/api/addacademics", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

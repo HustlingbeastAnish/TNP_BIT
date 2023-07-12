@@ -52,35 +52,35 @@ function App() {
           <Route
             index
             element={
-              <PrivateRoute>
-                <StudentDashboard />
-              </PrivateRoute>
+              // <PrivateRoute>
+              <StudentDashboard />
+              // </PrivateRoute>
             }
           ></Route>
           <Route path="profile">
             <Route
               index
               element={
-                <PrivateRoute>
-                  <Profile />
-                </PrivateRoute>
+                // <PrivateRoute>
+                <Profile />
+                // </PrivateRoute>
               }
             ></Route>
             <Route
               path="addacademics"
               element={
-                <PrivateRoute>
-                  <AddAcdemics />
-                </PrivateRoute>
+                // <PrivateRoute>
+                <AddAcdemics />
+                // </PrivateRoute>
               }
             ></Route>
           </Route>
           <Route
             path="notice"
             element={
-              <PrivateRoute>
-                <Notice />
-              </PrivateRoute>
+              // <PrivateRoute>
+              <Notice />
+              // </PrivateRoute>
             }
           ></Route>
           {/* <Route path="expressions" element={<Setting  />}></Route>
