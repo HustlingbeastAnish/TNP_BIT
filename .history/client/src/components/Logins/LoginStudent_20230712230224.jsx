@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import studlogo from "../../assets/svgs/student-medium-skin-tone-svgrepo-com.svg";
 import { StudentContext } from "../../../LoginContext/StudentContext";
 import Cookies from "js-cookie";
-import { server } from "../../main";
+
 const Login = () => {
   const navigate = useNavigate();
   const [email, setemail] = useState("");
@@ -14,7 +14,7 @@ const Login = () => {
   const PostLogIn = async (e) => {
     e.preventDefault();
 
-    const res = await fetch(`${server}/api/loginStudent`, {
+    const res = await fetch("api/loginStudent", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

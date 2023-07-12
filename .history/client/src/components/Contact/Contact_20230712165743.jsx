@@ -11,7 +11,7 @@ function Contact() {
         className=""
         allowFullScreen=""
         loading="lazy"
-        referrerPolicy="no-referrer-when-downgrade"
+        referrerpolicy="no-referrer-when-downgrade"
       ></iframe>
     </div>
   );

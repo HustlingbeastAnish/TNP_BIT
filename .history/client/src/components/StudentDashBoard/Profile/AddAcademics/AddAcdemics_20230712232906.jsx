@@ -12,7 +12,6 @@ import Select from "@mui/material/Select";
 import College from "./svgs/college";
 import { StudentContext } from "../../../../../LoginContext/StudentContext";
 import { server } from "../../../../main";
-
 const AddAcdemics = () => {
   const context = useContext(StudentContext);
   const navigate = useNavigate();

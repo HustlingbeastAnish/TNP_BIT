@@ -12,7 +12,6 @@ import { Chart as ChartJS } from "chart.js/auto";
 import Loader from "../../Loader/Loader";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { server } from "../../../main";
 const Profile = () => {
   const navigate = useNavigate();
   const callSlogin = async () => {

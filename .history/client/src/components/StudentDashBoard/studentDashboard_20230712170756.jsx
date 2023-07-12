@@ -7,18 +7,20 @@ import Todo from "./svgs/todo";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { StudentContext } from "../../../LoginContext/StudentContext";
-import { server } from "../../main";
+
 const StudentDashboard = () => {
   const context = useContext(StudentContext);
-  // console.log(context.user);
+  console.log(context.user);
   const navigate = useNavigate();
   const callSlogin = async () => {
     try {
-      const res = await fetch(`${server}/afterslogin`, {
+      const res = await fetch("https://tnpbitmesra.onrender.com/afterslogin", {
         method: "GET",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
+          SameSite: "None", // Add SameSite attribute
+          Secure: true, // Add Secure attribute
         },
         credentials: "include",
       });

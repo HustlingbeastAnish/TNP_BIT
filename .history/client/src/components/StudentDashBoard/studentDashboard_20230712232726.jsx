@@ -7,7 +7,7 @@ import Todo from "./svgs/todo";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { StudentContext } from "../../../LoginContext/StudentContext";
-import { server } from "../../main";
+import server from "../../main";
 const StudentDashboard = () => {
   const context = useContext(StudentContext);
   // console.log(context.user);

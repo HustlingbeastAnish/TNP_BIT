@@ -11,14 +11,12 @@ import TextField from "@mui/material/TextField";
 import Select from "@mui/material/Select";
 import College from "./svgs/college";
 import { StudentContext } from "../../../../../LoginContext/StudentContext";
-import { server } from "../../../../main";
-
 const AddAcdemics = () => {
   const context = useContext(StudentContext);
   const navigate = useNavigate();
   const callSlogin = async () => {
     try {
-      const res = await fetch(`${server}/afterslogin`, {
+      const res = await fetch("http://localhost:8080/afterslogin", {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -99,24 +97,27 @@ const AddAcdemics = () => {
   // Add changes callback
   const AddChanges = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:8080/api/addacademics", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: context.user.name,
-        email: context.user.email,
-        roll: context.user.roll,
-        college: Cmarks,
-        school: {
-          class10: marks.class10,
-          class10_board: updatedStud.class10_board,
-          class12: marks.class12,
-          class12_board: updatedStud.class10_board,
+    const res = await fetch(
+      "https://tnpbitmesra.onrender.com/api/addacademics",
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
         },
-      }),
-    });
+        body: JSON.stringify({
+          name: context.user.name,
+          email: context.user.email,
+          roll: context.user.roll,
+          college: Cmarks,
+          school: {
+            class10: marks.class10,
+            class10_board: updatedStud.class10_board,
+            class12: marks.class12,
+            class12_board: updatedStud.class10_board,
+          },
+        }),
+      }
+    );
     const data = await res.json();
     if (data.status === 400 || !data || data.error) {
       Swal.fire({

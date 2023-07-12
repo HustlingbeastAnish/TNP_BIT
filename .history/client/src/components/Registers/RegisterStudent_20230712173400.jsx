@@ -7,7 +7,6 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Cookies from "js-cookie";
-import { server } from "../../main.jsx";
 const Signup = () => {
   const navigate = useNavigate();
 
@@ -41,7 +40,7 @@ const Signup = () => {
     }
     // Validate the form fields here
     try {
-      const response = await fetch(`${server}/api/registerStudent`, {
+      const response = await fetch("z/api/registerStudent", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

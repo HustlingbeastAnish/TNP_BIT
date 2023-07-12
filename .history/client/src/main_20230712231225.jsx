@@ -4,8 +4,7 @@ import App from "./App.jsx";
 import "./index.css";
 import "tailwindcss/tailwind.css";
 import { StudentProvider } from "../LoginContext/StudentContext.jsx";
-
-export const server = "http://localhost:8080";
+export const server = "https://todo-app-ihdc.onrender.com/api/v1";
 document.body.style.backgroundColor = "rgb(17 24 39)";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

@@ -5,13 +5,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus, faCircleMinus } from "@fortawesome/free-solid-svg-icons";
 import useState from "react-usestateref";
 import { StudentContext } from "../../../../LoginContext/StudentContext";
-import { server } from "../../../main";
 const TaskList = () => {
   const context = useContext(StudentContext);
   const navigate = useNavigate();
   const callSlogin = async () => {
     try {
-      const res = await fetch(`${server}/afterslogin`, {
+      const res = await fetch("https://tnpbitmesra.onrender.com/afterslogin", {
         method: "GET",
         headers: {
           Accept: "application/json",

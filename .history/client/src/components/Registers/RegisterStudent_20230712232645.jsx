@@ -7,7 +7,7 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Cookies from "js-cookie";
-import { server } from "../../main.jsx";
+const {server} from "../../main.jsx";
 const Signup = () => {
   const navigate = useNavigate();
 

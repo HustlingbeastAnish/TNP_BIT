@@ -82,12 +82,40 @@ function App() {
         <Route path="loginrecruiter" element={<LoginRecruiter />}></Route>
         <Route path="studentDashboard">
           <Route path="tasklist" element={<TaskList />}></Route>
-          <Route index element={<StudentDashboard />}></Route>
+          <Route
+            index
+            element={
+              // <PrivateRoute>
+                <StudentDashboard />
+              // </PrivateRoute>
+            }
+          ></Route>
           <Route path="profile">
-            <Route index element={<Profile />}></Route>
-            <Route path="addacademics" element={<AddAcdemics />}></Route>
+            <Route
+              index
+              element={
+                // <PrivateRoute>
+                  <Profile />
+                // </PrivateRoute>
+              }
+            ></Route>
+            <Route
+              path="addacademics"
+              element={
+                // <PrivateRoute>
+                  <AddAcdemics />
+                // </PrivateRoute>/
+              }
+            ></Route>
           </Route>
-          <Route path="notice" element={<Notice />}></Route>
+          <Route
+            path="notice"
+            element={
+              // <PrivateRoute>
+                <Notice />
+              </PrivateRoute>/
+            }
+          ></Route>
         </Route>
       </Route>
     )

@@ -12,12 +12,11 @@ import { Chart as ChartJS } from "chart.js/auto";
 import Loader from "../../Loader/Loader";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { server } from "../../../main";
 const Profile = () => {
   const navigate = useNavigate();
   const callSlogin = async () => {
     try {
-      const res = await fetch(`${server}/afterslogin`, {
+      const res = await fetch("https://tnpbitmesra.onrender.com/afterslogin", {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -115,7 +114,7 @@ const Profile = () => {
   const saveChanges = async (e) => {
     e.preventDefault();
     const { name, email, phone, branch } = updatedStud;
-    const res = await fetch(`http://localhost:8080/api/edituser`, {
+    const res = await fetch(`https://tnpbitmesra.onrender.com/api/edituser`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -166,7 +165,7 @@ const Profile = () => {
     try {
       axios
         .get(
-          `http://localhost:8080/api/getacademics?email=${context.user.email}`
+          `https://tnpbitmesra.onrender.com/api/getacademics?email=${context.user.email}`
         )
         .then((response) => {
           const res = response.data.exists;

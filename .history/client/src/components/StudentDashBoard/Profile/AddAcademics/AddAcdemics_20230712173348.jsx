@@ -11,14 +11,12 @@ import TextField from "@mui/material/TextField";
 import Select from "@mui/material/Select";
 import College from "./svgs/college";
 import { StudentContext } from "../../../../../LoginContext/StudentContext";
-import { server } from "../../../../main";
-
 const AddAcdemics = () => {
   const context = useContext(StudentContext);
   const navigate = useNavigate();
   const callSlogin = async () => {
     try {
-      const res = await fetch(`${server}/afterslogin`, {
+      const res = await fetch("http://localhost:8080/afterslogin", {
         method: "GET",
         headers: {
           Accept: "application/json",

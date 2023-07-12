@@ -14,7 +14,7 @@ const Login = () => {
   const PostLogIn = async (e) => {
     e.preventDefault();
 
-    const res = await fetch(`${server}/api/loginStudent`, {
+    const res = await fetch("/api/loginStudent", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
