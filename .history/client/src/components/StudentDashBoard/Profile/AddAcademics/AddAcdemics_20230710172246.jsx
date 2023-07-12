@@ -1,0 +1,432 @@
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import BottomDrawer from "../../BottomDrawer/BottomDrawer";
+import StudentNavbar from "../../StudentNavbar/StudentNavbar";
+import School from "./svgs/school";
+import Swal from "sweetalert2";
+import MenuItem from "@mui/material/MenuItem";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
+import TextField from "@mui/material/TextField";
+import Select from "@mui/material/Select";
+import College from "./svgs/college";
+import { StudentContext } from "../../../../../LoginContext/StudentContext";
+const AddAcdemics = () => {
+  const context = useContext(StudentContext);
+  const navigate = useNavigate();
+  console.log(context.user);
+  const [updatedStud, setupdatedStud] = useState({
+    class10_board: "",
+    class12_board: "",
+  });
+  const [marks, setmarks] = useState({
+    class10: "",
+    class12: "",
+  });
+  const [Cmarks, setCmarks] = useState({
+    sem1: "0.00",
+    sem2: "0.00",
+    sem3: "0.00",
+    sem4: "0.00",
+    sem5: "0.00",
+    sem6: "0.00",
+    sem7: "0.00",
+    sem8: "0.00",
+  });
+
+  const handleEdit = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setupdatedStud({ ...updatedStud, [name]: value });
+  };
+  const marksEdit = (e) => {
+    const { name, value } = e.target;
+    const regex = /^(\d{0,2}(\.\d{0,2})?)?$/; // Regex pattern for XX.XX format
+    if (regex.test(value) || value === "" || value.length > 5) {
+      setmarks({ ...marks, [name]: value.substr(0, 5) });
+    }
+  };
+  const CmarksEdit = (e) => {
+    const { name, value } = e.target;
+    const regex = /^\d(\.\d{0,2})?$/; // Regex pattern for X.XX format
+    if (regex.test(value) || value === "" || value.length > 4) {
+      setCmarks({ ...Cmarks, [name]: value.substr(0, 4) });
+    }
+  };
+
+  // Add changes callback
+  const AddChanges = async (e) => {
+    e.preventDefault();
+    const res = await fetch("https://tnpbit.onrender.com/api/addacademics", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: context.user.emailExists.name,
+        email: context.user.emailExists.email,
+        roll: context.user.emailExists.roll,
+        college: Cmarks,
+        school: {
+          class10: marks.class10,
+          class10_board: updatedStud.class10_board,
+          class12: marks.class12,
+          class12_board: updatedStud.class10_board,
+        },
+      }),
+    });
+    const data = await res.json();
+    if (data.status === 400 || !data || data.error) {
+      Swal.fire({
+        title: "Bad Credentials",
+        text: "Please enter valid details",
+        icon: "error",
+        confirmButtonText: "Retry",
+      });
+    } else {
+      Swal.fire({
+        title: "Changes Saved Succesfully",
+        icon: "success",
+        timer: 1000,
+      });
+      console.log("Successfully Logged In");
+      setTimeout(() => {
+        navigate("/StudentDashBoard/profile");
+      }, 1500);
+    }
+  };
+  return (
+    <div className="bg-gray-900 h-screen">
+      <div>
+        <StudentNavbar />
+      </div>
+      <div>
+        <div className="grid mb-8 border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 md:mb-12 md:grid-cols-2">
+          <figure className="flex flex-row items-center justify-around p-2 text-center bg-white border-b border-gray-200 rounded-t-lg md:rounded-t-none md:rounded-tl-lg md:border-r dark:bg-gray-800 dark:border-gray-700">
+            <div>
+              <School />
+            </div>
+            <div>
+              <blockquote className="max-w-2xl mx-auto mb-4 text-gray-500 lg:mb-8 dark:text-gray-400">
+                <div className="flex">
+                  <h3 className="text-3xl font-extrabold text-gray-900 dark:text-white m-3">
+                    Fill Out your Class 10 Details
+                  </h3>
+                </div>
+              </blockquote>
+              <div className="flex justify-around">
+                <div className="">
+                  <label
+                    htmlFor="email"
+                    className="block mb-2 text-sm font-medium text-white dark:text-white"
+                  >
+                    Select Board
+                  </label>
+                  <FormControl fullWidth>
+                    <Select
+                      style={{
+                        borderRadius: "8px",
+                        height: "42px",
+                        color: "white",
+                      }}
+                      className="shadow-sm bg-gray-50 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value={updatedStud.class10_board}
+                      onChange={handleEdit}
+                      name="class10_board"
+                      label="Branches"
+                    >
+                      <MenuItem value={"CBSE"}>CBSE</MenuItem>
+                      <MenuItem value={"ICSE"}>ICSE</MenuItem>
+                      <MenuItem value={"STATE"}>STATE</MenuItem>
+                      <MenuItem value={"CISCE"}>CICSE</MenuItem>
+                      <MenuItem value={"NIOS"}>NIOS</MenuItem>
+                      <MenuItem value={"OTHER"}>OTHER</MenuItem>
+                    </Select>
+                  </FormControl>
+                </div>
+                <div className="flex flex-col justify-center items-center">
+                  <label
+                    htmlFor="email"
+                    className="block mb-2 text-sm font-medium text-white dark:text-white"
+                  >
+                    Percentage Scored
+                  </label>
+                  <input
+                    type="email"
+                    id="class10"
+                    name="class10"
+                    value={marks.class10}
+                    onChange={marksEdit}
+                    className="shadow-sm bg-gray-50 border w-1/2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                    placeholder="%"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+          </figure>
+          <figure className="flex flex-row items-center justify-around p-2 text-center bg-white border-b border-gray-200 rounded-t-lg md:rounded-t-none md:rounded-tl-lg md:border-r dark:bg-gray-800 dark:border-gray-700">
+            <div>
+              <School />
+            </div>
+            <div>
+              <blockquote className="max-w-2xl mx-auto mb-4 text-gray-500 lg:mb-8 dark:text-gray-400">
+                <div className="flex">
+                  <h3 className="text-3xl font-extrabold text-gray-900 dark:text-white m-3">
+                    Fill Out your Class 12 Details
+                  </h3>
+                </div>
+              </blockquote>
+              <div className="flex justify-around">
+                <div className="">
+                  <label
+                    htmlFor="email"
+                    className="block mb-2 text-sm font-medium text-white dark:text-white"
+                  >
+                    Select Board
+                  </label>
+                  <FormControl fullWidth>
+                    <Select
+                      style={{
+                        borderRadius: "8px",
+                        height: "42px",
+                        color: "white",
+                      }}
+                      className="shadow-sm bg-gray-50 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value={updatedStud.class12_board}
+                      onChange={handleEdit}
+                      name="class12_board"
+                      label="Branches"
+                    >
+                      <MenuItem value={"CBSE"}>CBSE</MenuItem>
+                      <MenuItem value={"ICSE"}>ICSE</MenuItem>
+                      <MenuItem value={"STATE"}>STATE</MenuItem>
+                      <MenuItem value={"CISCE"}>CICSE</MenuItem>
+                      <MenuItem value={"NIOS"}>NIOS</MenuItem>
+                      <MenuItem value={"OTHER"}>OTHER</MenuItem>
+                    </Select>
+                  </FormControl>
+                </div>
+                <div className="flex flex-col justify-center items-center">
+                  <label
+                    htmlFor="email"
+                    className="block mb-2 text-sm font-medium text-white dark:text-white"
+                  >
+                    Percentage Scored
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="class12"
+                    value={marks.class12}
+                    onChange={marksEdit}
+                    className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                    placeholder="%"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+          </figure>
+        </div>
+        <figure className="flex flex-col items-center justify-center p-8 text-center bg-white border-b border-gray-200 rounded-tr-lg dark:bg-gray-800 dark:border-gray-700">
+          <form className="m-10">
+            <div className="flex flex-row items-center justify-around">
+              <div>
+                <College />
+              </div>
+              <div>
+                <h2 className="text-3xl font-extrabold dark:text-white m-4">
+                  Enter your College CGPA
+                </h2>
+                <div className="relative z-0 w-full m-2 group flex flex-col">
+                  <div className="grid grid-flow-col justify-stretch">
+                    <div className="m-2">
+                      <label
+                        htmlFor="email"
+                        className="block mb-2 text-sm font-medium text-white dark:text-white"
+                      >
+                        Sem1
+                      </label>
+                      <input
+                        name="sem1"
+                        value={Cmarks.sem1}
+                        id="sem1"
+                        onChange={CmarksEdit}
+                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                        placeholder="Enter your sem1 marks"
+                        maxLength={4}
+                        required
+                      />
+                    </div>
+                    <div className="m-2">
+                      <label
+                        htmlFor="email"
+                        className="block mb-2 text-sm font-medium text-white dark:text-white"
+                      >
+                        Sem2
+                      </label>
+                      <input
+                        name="sem2"
+                        value={Cmarks.sem2}
+                        id="sem2"
+                        onChange={CmarksEdit}
+                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                        placeholder="Enter your sem2 marks"
+                        maxLength={4}
+                        pattern="[0-9]*"
+                        required
+                      />
+                    </div>
+                    <div className="m-2">
+                      <label
+                        htmlFor="email"
+                        className="block mb-2 text-sm font-medium text-white dark:text-white"
+                      >
+                        Sem3
+                      </label>
+                      <input
+                        name="sem3"
+                        value={Cmarks.sem3}
+                        id="sem3"
+                        onChange={CmarksEdit}
+                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                        placeholder="Enter your sem3 marks"
+                        maxLength={4}
+                        pattern="[0-9]*"
+                        required
+                      />
+                    </div>
+                    <div className="m-2">
+                      <label
+                        htmlFor="email"
+                        className="block mb-2 text-sm font-medium text-white dark:text-white"
+                      >
+                        Sem4
+                      </label>
+                      <input
+                        name="sem4"
+                        value={Cmarks.sem4}
+                        id="sem4"
+                        onChange={CmarksEdit}
+                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                        placeholder="Enter your sem4 marks"
+                        maxLength={4}
+                        pattern="[0-9]*"
+                        required
+                      />
+                    </div>
+                    <div className="m-2">
+                      <label
+                        htmlFor="email"
+                        className="block mb-2 text-sm font-medium text-white dark:text-white"
+                      >
+                        Sem5
+                      </label>
+                      <input
+                        name="sem5"
+                        value={Cmarks.sem5}
+                        id="sem5"
+                        onChange={CmarksEdit}
+                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                        placeholder="Enter your sem5 marks"
+                        maxLength={4}
+                        pattern="[0-9]*"
+                        required
+                      />
+                    </div>
+                    <div className="m-2">
+                      <label
+                        htmlFor="email"
+                        className="block mb-2 text-sm font-medium text-white dark:text-white"
+                      >
+                        Sem6
+                      </label>
+                      <input
+                        name="sem6"
+                        value={Cmarks.sem6}
+                        id="sem6"
+                        onChange={CmarksEdit}
+                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                        placeholder="Enter your sem6 marks"
+                        maxLength={4}
+                        pattern="[0-9]*"
+                        required
+                      />
+                    </div>
+                    <div className="m-2">
+                      <label
+                        htmlFor="email"
+                        className="block mb-2 text-sm font-medium text-white dark:text-white"
+                      >
+                        Sem7
+                      </label>
+                      <input
+                        name="sem7"
+                        value={Cmarks.sem7}
+                        id="sem7"
+                        onChange={CmarksEdit}
+                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                        placeholder="Enter your sem7 marks"
+                        maxLength={4}
+                        pattern="[0-9]*"
+                        required
+                      />
+                    </div>
+                    <div className="m-2">
+                      <label
+                        htmlFor="email"
+                        className="block mb-2 text-sm font-medium text-white dark:text-white"
+                      >
+                        Sem8
+                      </label>
+                      <input
+                        name="sem8"
+                        value={Cmarks.sem8}
+                        id="sem8"
+                        onChange={CmarksEdit}
+                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                        placeholder="Enter your sem8 marks"
+                        maxLength={4}
+                        pattern="[0-9]*"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+          <button
+            onClick={AddChanges}
+            className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900"
+          >
+            Save Changes
+            <svg
+              aria-hidden="true"
+              className="ml-2 -mr-1 w-4 h-4"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fillRule="evenodd"
+                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                clipRule="evenodd"
+              ></path>
+            </svg>
+          </button>
+        </figure>
+      </div>
+      <div>
+        <BottomDrawer />
+      </div>
+    </div>
+  );
+};
+
+export default AddAcdemics;
