@@ -1,3 +1,5 @@
+## Get Started
+You can use TNP_BIT now at https://tnpbitmesra.netlify.app/
 
 # Project Title
 
@@ -22,7 +24,5 @@ Welcome to the Training and Placement Portal for Birla Institute of Technology M
 - Placement Notifications: Students can stay up-to-date with the latest placement notifications through the portal. This feature ensures that students never miss any important announcements or opportunities.
 
 - Productivity-Boosting To-Do List: The portal includes a beautifully designed to-do list feature that helps students increase their productivity. They can create tasks, set deadlines, and mark tasks as complete, allowing them to organize their work efficiently.
-- 
-## Get Started
-You can use TNP_BIT now at https://tnpbitmesra.netlify.app/.
+
     
